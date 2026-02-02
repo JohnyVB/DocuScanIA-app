@@ -5,11 +5,7 @@ import { useForm } from "../hooks/useForm";
 import { onLoginFeature } from "../features/LoginFeature";
 import { useState } from "react";
 import userStore from "../store/userStore";
-
-type RootStackParamList = {
-  Login: undefined;
-  MyTabs: undefined;
-};
+import { RootStackParamList } from "../types/NavigationTypes";
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, "Login">;
 
@@ -20,7 +16,7 @@ export const LoginScreen = () => {
     email: "",
     password: "",
   });
-  const { setToken } = userStore();
+  const { setToken, token } = userStore();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -72,7 +68,7 @@ export const LoginScreen = () => {
         secureTextEntry
       />
 
-      <TouchableOpacity style={styles.btnInit} onPress={handleLogin} disabled={loading}>
+      <TouchableOpacity style={styles.btnSession} onPress={handleLogin} disabled={loading}>
         {loading && <Text style={{ color: "#fff", fontSize: 16 }}>Cargando...</Text>}
         {!loading && <Text style={{ color: "#fff", fontSize: 16 }}>Iniciar Sesión</Text>}
       </TouchableOpacity>
@@ -84,6 +80,7 @@ export const LoginScreen = () => {
         <TouchableOpacity onPress={() => Alert.alert("Registro", "Funcionalidad de registro aún no implementada")}>
           <Text style={{ color: "blue" }}>¿No tienes una cuenta? Registrarse</Text>
         </TouchableOpacity>
+        {token.length > 0 && <Text>Token actual: {token}</Text>}
       </View>
     </View>
   );
@@ -117,7 +114,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     backgroundColor: "#fff",
   },
-  btnInit: {
+  btnSession: {
     backgroundColor: "#007bff",
     paddingVertical: 12,
     paddingHorizontal: 32,
