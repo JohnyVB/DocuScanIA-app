@@ -4,17 +4,8 @@ import { ScanScreen } from "../screens/ScanScreen";
 import { DocumentsScreen } from "../screens/DocumentsScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ProfileScreen } from "../screens/ProfileScreen";
-
-type RootStackParamList = {
-  Login: undefined;
-  MyTabs: undefined;
-};
-
-type TabParamList = {
-  Scan: undefined;
-  Documents: undefined;
-  Profile: undefined;
-};
+import { RegisterScreen } from "../screens/RegisterScreen";
+import { RootStackParamList, TabParamList } from "../types/NavigationTypes";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -33,6 +24,7 @@ export const RootNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
       <Stack.Screen name="MyTabs" component={MyTabs} />
     </Stack.Navigator>
   );

@@ -1,9 +1,19 @@
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { Text, View, StyleSheet, TextInput, Alert, TouchableOpacity } from "react-native";
-import { useForm } from "../hooks/useForm";
-import { onLoginFeature } from "../features/LoginFeature";
 import { useState } from "react";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import GlobalStyles from "../../GlobalStyles";
+import { onLoginFeature } from "../features/LoginFeature";
+import { useForm } from "../hooks/useForm";
 import userStore from "../store/userStore";
 import { RootStackParamList } from "../types/NavigationTypes";
 
@@ -47,7 +57,11 @@ export const LoginScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView
+      style={GlobalStyles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={80}
+    >
       <Text style={styles.title}>DocuScanAI</Text>
       <Text style={styles.subtitle}>Iniciar Sesión</Text>
 
@@ -68,7 +82,7 @@ export const LoginScreen = () => {
         secureTextEntry
       />
 
-      <TouchableOpacity style={styles.btnSession} onPress={handleLogin} disabled={loading}>
+      <TouchableOpacity style={GlobalStyles.btn} onPress={handleLogin} disabled={loading}>
         {loading && <Text style={{ color: "#fff", fontSize: 16 }}>Cargando...</Text>}
         {!loading && <Text style={{ color: "#fff", fontSize: 16 }}>Iniciar Sesión</Text>}
       </TouchableOpacity>
@@ -77,23 +91,16 @@ export const LoginScreen = () => {
         <TouchableOpacity onPress={() => Alert.alert("Registro", "Funcionalidad de registro aún no implementada")}>
           <Text style={{ color: "blue" }}>¿Olvidaste tu contraseña?</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => Alert.alert("Registro", "Funcionalidad de registro aún no implementada")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Register")}>
           <Text style={{ color: "blue" }}>¿No tienes una cuenta? Registrarse</Text>
         </TouchableOpacity>
         {token.length > 0 && <Text>Token actual: {token}</Text>}
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-    backgroundColor: "#f5f5f5",
-  },
   title: {
     fontSize: 32,
     fontWeight: "bold",
@@ -113,13 +120,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 15,
     backgroundColor: "#fff",
-  },
-  btnSession: {
-    backgroundColor: "#007bff",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 8,
-    marginTop: 10,
   },
   messagesContainer: {
     marginTop: 20,
