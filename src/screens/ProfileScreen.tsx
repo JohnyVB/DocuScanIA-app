@@ -2,7 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import GlobalStyles from "../../GlobalStyles";
+import GlobalStyles from "../styles/GlobalStyles";
 import userStore from "../store/userStore";
 import { RootStackParamList } from "../types/NavigationTypes";
 

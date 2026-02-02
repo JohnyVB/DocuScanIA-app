@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ProfileScreen } from "../screens/ProfileScreen";
 import { RegisterScreen } from "../screens/RegisterScreen";
 import { RootStackParamList, TabParamList } from "../types/NavigationTypes";
+import { RecoverPassScreen } from "../screens/RecoverPassScreen";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -25,6 +26,7 @@ export const RootNavigator = () => {
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Register" component={RegisterScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="RecoverPass" component={RecoverPassScreen} options={{ headerShown: false }} />
       <Stack.Screen name="MyTabs" component={MyTabs} />
     </Stack.Navigator>
   );

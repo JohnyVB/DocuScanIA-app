@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, View } from "react-native";
-import GlobalStyles from "../../GlobalStyles";
+import GlobalStyles from "../styles/GlobalStyles";
 import userStore from "../store/userStore";
 
 export const ScanScreen = () => {

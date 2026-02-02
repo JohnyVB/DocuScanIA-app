@@ -1,6 +1,7 @@
 export type RootStackParamList = {
   Login: undefined;
   Register: undefined;
+  RecoverPass: undefined;
   MyTabs: undefined;
   Scan: undefined;
   Documents: undefined;

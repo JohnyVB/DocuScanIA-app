@@ -1,4 +1,4 @@
-import axiosInstance from "../services/axios";
+import axiosInstance from "../services/axiosService";
 import Constants from "expo-constants";
 
 export const onLoginFeature = async (email: string, password: string) => {

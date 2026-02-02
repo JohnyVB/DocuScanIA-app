@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import GlobalStyles from "../../GlobalStyles";
+import GlobalStyles from "../styles/GlobalStyles";
 import { onLoginFeature } from "../features/LoginFeature";
 import { useForm } from "../hooks/useForm";
 import userStore from "../store/userStore";
@@ -88,7 +88,7 @@ export const LoginScreen = () => {
       </TouchableOpacity>
 
       <View style={styles.messagesContainer}>
-        <TouchableOpacity onPress={() => Alert.alert("Registro", "Funcionalidad de registro aún no implementada")}>
+        <TouchableOpacity onPress={() => navigation.navigate("RecoverPass")}>
           <Text style={{ color: "blue" }}>¿Olvidaste tu contraseña?</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Register")}>
