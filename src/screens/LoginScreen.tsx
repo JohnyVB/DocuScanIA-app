@@ -4,6 +4,7 @@ import { Text, View, StyleSheet, TextInput, Alert, TouchableOpacity } from "reac
 import { useForm } from "../hooks/useForm";
 import { onLoginFeature } from "../features/LoginFeature";
 import { useState } from "react";
+import userStore from "../store/userStore";
 
 type RootStackParamList = {
   Login: undefined;
@@ -19,6 +20,7 @@ export const LoginScreen = () => {
     email: "",
     password: "",
   });
+  const { setToken } = userStore();
 
   const handleLogin = async () => {
     if (!email || !password) {
@@ -30,16 +32,22 @@ export const LoginScreen = () => {
       Alert.alert("Error", "Por favor ingresa un email válido");
       return;
     }
-    setLoading(true);
-    const data = await onLoginFeature(email, password);
-    console.log(JSON.stringify(data, null, 2));
-    if (data.status === "success") {
-      navigation.navigate("MyTabs");
-    } else {
-      Alert.alert("Error", data.message || "Error al iniciar sesión");
+    try {
+      setLoading(true);
+      const data = await onLoginFeature(email, password);
+      if (data.status === "success") {
+        console.log(JSON.stringify(data, null, 2));
+        setToken(data.token);
+        setLoading(false);
+        navigation.navigate("MyTabs");
+      } else {
+        Alert.alert("Error", data.message || "Error al iniciar sesión");
+        setLoading(false);
+      }
+    } catch (error) {
+      console.error("LoginScreen Error:", error);
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
