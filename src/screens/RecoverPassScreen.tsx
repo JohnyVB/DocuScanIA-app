@@ -11,10 +11,12 @@ type RecoverPassScreenNavigationProp = NativeStackNavigationProp<RootStackParamL
 export const RecoverPassScreen = () => {
   const navigation = useNavigation<RecoverPassScreenNavigationProp>();
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState<"email" | "code">("email");
-  const { email, code, onChangeForm } = useForm({
+  const [step, setStep] = useState<"email" | "code" | "reset">("email");
+  const { email, code, password, confirmPassword, onChangeForm } = useForm({
     email: "",
     code: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const handleSendCode = async () => {
@@ -34,7 +36,22 @@ export const RecoverPassScreen = () => {
     }
     // Lógica para verificar el código
     console.log(`Verificando el código: ${code}`);
-    Alert.alert("Éxito", "La contraseña ha sido recuperada con éxito.");
+    // Suponiendo que el código es válido
+    setStep("reset");
+  };
+
+  const handleResetPassword = async () => {
+    if (password !== confirmPassword) {
+      Alert.alert("Error", "Las contraseñas no coinciden");
+      return;
+    }
+    if (password.length < 6) {
+      Alert.alert("Error", "La contraseña debe tener al menos 6 caracteres");
+      return;
+    }
+    // Lógica para cambiar la contraseña
+    console.log(`Cambiando la contraseña para el email: ${email}`);
+    Alert.alert("Éxito", "La contraseña ha sido cambiada con éxito.");
     navigation.navigate("Login");
   };
 
@@ -43,18 +60,31 @@ export const RecoverPassScreen = () => {
       <Text style={styles.title}>DocuScanAI</Text>
       <Text style={styles.subtitle}>Recuperar Contraseña</Text>
 
-      {step === "email" ? (
+      {step === "email" && (
         <>
           <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={(value) => onChangeForm(value, "email")} keyboardType="email-address" autoCapitalize="none" />
           <TouchableOpacity style={GlobalStyles.btn} onPress={handleSendCode} disabled={loading}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Enviar Código de Verificación</Text>
           </TouchableOpacity>
         </>
-      ) : (
+      )}
+
+      {step === "code" && (
         <>
           <TextInput style={styles.input} placeholder="Código de 6 dígitos" value={code} onChangeText={(value) => onChangeForm(value, "code")} keyboardType="number-pad" maxLength={6} />
           <TouchableOpacity style={GlobalStyles.btn} onPress={handleVerifyCode} disabled={loading}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Verificar Código</Text>
+          </TouchableOpacity>
+        </>
+      )}
+
+      {step === "reset" && (
+        <>
+          <TextInput style={[styles.input, styles.disabledInput]} value={email} editable={false} />
+          <TextInput style={styles.input} placeholder="Nueva Contraseña" value={password} onChangeText={(value) => onChangeForm(value, "password")} secureTextEntry />
+          <TextInput style={styles.input} placeholder="Confirmar Nueva Contraseña" value={confirmPassword} onChangeText={(value) => onChangeForm(value, "confirmPassword")} secureTextEntry />
+          <TouchableOpacity style={GlobalStyles.btn} onPress={handleResetPassword} disabled={loading}>
+            <Text style={{ color: "#fff", fontSize: 16 }}>Guardar Contraseña</Text>
           </TouchableOpacity>
         </>
       )}
@@ -88,6 +118,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 15,
     backgroundColor: "#fff",
+  },
+  disabledInput: {
+    backgroundColor: "#f0f0f0",
+    color: "#a0a0a0",
   },
   messagesContainer: {
     marginTop: 20,
