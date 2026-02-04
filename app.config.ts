@@ -12,9 +12,7 @@ export default {
             resizeMode: "contain",
             backgroundColor: "#ffffff",
         },
-        ios: {
-            supportsTablet: false,
-        },
+        ios: { supportsTablet: false },
         android: {
             adaptiveIcon: {
                 foregroundImage: "./assets/adaptive-icon.png",
@@ -22,13 +20,13 @@ export default {
             },
         },
         extra: {
-            apiDevelopmentUrl: process.env.API_DEVELOPMENT_URL,
-            apiProductionUrl: process.env.API_PRODUCTION_URL,
+            apiBaseUrl: process.env.API_BASE_URL,
             apiLoginUrl: process.env.API_LOGIN_URL,
-            apiRegisterUrl: process.env.API_REGISTER_URL,
-            apiForgotPasswordUrl: process.env.API_FORGOT_PASSWORD_URL,
-            apiScanDocumentUrl: process.env.API_SCAN_DOCUMENT_URL,
-            apiGetDocumentsUrl: process.env.API_GET_DOCUMENTS_URL,
+            apiSendResetPasswordCodeUrl:
+                process.env.API_SEND_RESET_PASSWORD_CODE_URL,
+            apiVerifyResetPasswordCodeUrl:
+                process.env.API_VERIFY_RESET_PASSWORD_CODE_URL,
+            apiResetPasswordUrl: process.env.API_RESET_PASSWORD_URL,
         },
     },
 };

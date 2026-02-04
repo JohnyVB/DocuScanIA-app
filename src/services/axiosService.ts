@@ -1,12 +1,12 @@
 import axios from "axios";
 import Constants from "expo-constants";
 
+const { apiBaseUrl } = Constants.expoConfig?.extra || {};
+
 const axiosInstance = axios.create({
-    baseURL: Constants.expoConfig?.extra?.apiDevelopmentUrl,
+    baseURL: apiBaseUrl,
     timeout: 10000,
-    headers: {
-        "Content-Type": "application/json",
-    },
+    headers: { "Content-Type": "application/json" },
 });
 
 export default axiosInstance;
