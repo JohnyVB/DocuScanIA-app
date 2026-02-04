@@ -11,20 +11,26 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import GlobalStyles from "../styles/GlobalStyles";
+import {
+    onResetPasswordFeature,
+    onSendResetPasswordCodeFeature,
+    onVerifyResetPasswordCodeFeature,
+} from "../features/RecoverPassFeature";
 import { useForm } from "../hooks/useForm";
+import GlobalStyles from "../styles/GlobalStyles";
 import { RootStackParamList } from "../types/NavigationTypes";
-import { onSendResetPasswordCodeFeature } from "../features/RecoverPassFeature";
 
 type RecoverPassScreenNavigationProp = NativeStackNavigationProp<
     RootStackParamList,
     "RecoverPass"
 >;
 
+type StepType = "email" | "code" | "reset";
+
 export const RecoverPassScreen = () => {
     const navigation = useNavigation<RecoverPassScreenNavigationProp>();
     const [loading, setLoading] = useState(false);
-    const [step, setStep] = useState<"email" | "code" | "reset">("email");
+    const [step, setStep] = useState<StepType>("email");
     const { email, code, password, confirmPassword, onChangeForm } = useForm({
         email: "johny.villegas.dev@gmail.com",
         code: "",
@@ -55,9 +61,20 @@ export const RecoverPassScreen = () => {
             Alert.alert("Error", "El código debe tener 6 dígitos");
             return;
         }
-        // Lógica para verificar el código
-        console.log(`Verificando el código: ${code}`);
-        // Suponiendo que el código es válido
+
+        setLoading(true);
+        const data = await onVerifyResetPasswordCodeFeature(email, code);
+
+        if (!data || data.status !== "success") {
+            Alert.alert(
+                "Error",
+                data?.message || "Error al verificar el código de verificación",
+            );
+            setLoading(false);
+            return;
+        }
+
+        setLoading(false);
         setStep("reset");
     };
 
@@ -73,9 +90,17 @@ export const RecoverPassScreen = () => {
             );
             return;
         }
-        // Lógica para cambiar la contraseña
-        console.log(`Cambiando la contraseña para el email: ${email}`);
-        Alert.alert("Éxito", "La contraseña ha sido cambiada con éxito.");
+
+        const data = await onResetPasswordFeature(email, password);
+        if (!data || data.status !== "success") {
+            setLoading(false);
+            Alert.alert(
+                "Error",
+                data?.message || "Error al cambiar la contraseña",
+            );
+            return;
+        }
+        setLoading(false);
         navigation.navigate("Login");
     };
 
@@ -139,6 +164,9 @@ export const RecoverPassScreen = () => {
                     <TextInput
                         style={styles.input}
                         placeholder="Nueva Contraseña"
+                        placeholderTextColor="#999"
+                        autoCapitalize="none"
+                        autoCorrect={false}
                         value={password}
                         onChangeText={(value) =>
                             onChangeForm(value, "password")
@@ -148,6 +176,9 @@ export const RecoverPassScreen = () => {
                     <TextInput
                         style={styles.input}
                         placeholder="Confirmar Nueva Contraseña"
+                        placeholderTextColor="#999"
+                        autoCapitalize="none"
+                        autoCorrect={false}
                         value={confirmPassword}
                         onChangeText={(value) =>
                             onChangeForm(value, "confirmPassword")

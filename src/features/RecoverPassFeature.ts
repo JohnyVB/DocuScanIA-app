@@ -2,7 +2,6 @@ import axiosInstance from "../services/axiosService";
 import Constants from "expo-constants";
 
 const {
-    apiBaseUrl,
     apiSendResetPasswordCodeUrl,
     apiVerifyResetPasswordCodeUrl,
     apiResetPasswordUrl,
@@ -29,6 +28,7 @@ export const onVerifyResetPasswordCodeFeature = async (
         const { data } = await axiosInstance.post(
             apiVerifyResetPasswordCodeUrl,
             { email, code },
+            { headers: { "Content-Type": "application/json" } },
         );
         return data;
     } catch (error) {
@@ -41,10 +41,11 @@ export const onResetPasswordFeature = async (
     newPassword: string,
 ) => {
     try {
-        const { data } = await axiosInstance.post(apiResetPasswordUrl, {
-            email,
-            newPassword,
-        });
+        const { data } = await axiosInstance.post(
+            apiResetPasswordUrl,
+            { email, newPassword },
+            { headers: { "Content-Type": "application/json" } },
+        );
         return data;
     } catch (error) {
         console.error("Reset Password Error:", error);
