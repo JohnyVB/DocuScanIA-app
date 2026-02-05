@@ -27,7 +27,7 @@ export const LoginScreen = () => {
     const [loading, setLoading] = useState(false);
     const { email, password, onChangeForm } = useForm({
         email: "johny.villegas.dev@gmail.com",
-        password: "admin123",
+        password: "johny23",
     });
     const { setToken, token, setUserData } = userStore();
 

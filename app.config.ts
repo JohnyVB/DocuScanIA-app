@@ -22,6 +22,7 @@ export default {
         extra: {
             apiBaseUrl: process.env.API_BASE_URL,
             apiLoginUrl: process.env.API_LOGIN_URL,
+            apiRegisterUrl: process.env.API_NEW_USER_URL,
             apiSendResetPasswordCodeUrl:
                 process.env.API_SEND_RESET_PASSWORD_CODE_URL,
             apiVerifyResetPasswordCodeUrl:
