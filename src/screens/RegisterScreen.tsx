@@ -41,7 +41,6 @@ export const RegisterScreen = () => {
             Alert.alert("Error", "Por favor ingresa un email válido");
             return;
         }
-        console.log({ name, lastname, email, password });
 
         try {
             const data = await onRegisterFeature(
@@ -50,7 +49,7 @@ export const RegisterScreen = () => {
                 email,
                 password,
             );
-            console.log(data);
+
             if (data.status === "success") {
                 Alert.alert(
                     "Éxito",
