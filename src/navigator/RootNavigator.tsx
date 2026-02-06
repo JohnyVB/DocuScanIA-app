@@ -8,6 +8,7 @@ import { RegisterScreen } from "../screens/RegisterScreen";
 import { RootStackParamList, TabParamList } from "../types/NavigationTypes";
 import { RecoverPassScreen } from "../screens/RecoverPassScreen";
 import userStore from "../store/userStore";
+import { isTokenExpired } from "../features/NavigatorFeature";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -58,5 +59,7 @@ function AppStack() {
 
 export const RootNavigator = () => {
     const { token } = userStore();
-    return <>{token && token.length > 0 ? <AppStack /> : <AuthStack />}</>;
+    return (
+        <>{!token || isTokenExpired(token) ? <AuthStack /> : <AppStack />}</>
+    );
 };
