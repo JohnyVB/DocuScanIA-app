@@ -26,8 +26,8 @@ export const LoginScreen = () => {
     const navigation = useNavigation<LoginScreenNavigationProp>();
     const [loading, setLoading] = useState(false);
     const { email, password, onChangeForm } = useForm({
-        email: "",
-        password: "",
+        email: "johny.villegas.dev@gmail.com",
+        password: "johny23",
     });
     const { setToken, setUserData } = userStore();
 
@@ -45,10 +45,9 @@ export const LoginScreen = () => {
             setLoading(true);
             const data = await onLoginFeature(email, password);
             if (data.status === "success") {
-                setToken(data.token);
                 setUserData(data.userData);
+                setToken(data.token);
                 setLoading(false);
-                navigation.navigate("MyTabs");
             } else {
                 Alert.alert("Error", data.message || "Error al iniciar sesión");
                 setLoading(false);

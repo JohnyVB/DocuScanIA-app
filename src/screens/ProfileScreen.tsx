@@ -20,7 +20,6 @@ export const ProfileScreen = () => {
         setLoading(true);
         setToken(null);
         setUserData(null);
-        navigation.navigate("Login");
         setLoading(false);
     };
 

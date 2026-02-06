@@ -7,6 +7,7 @@ import { ProfileScreen } from "../screens/ProfileScreen";
 import { RegisterScreen } from "../screens/RegisterScreen";
 import { RootStackParamList, TabParamList } from "../types/NavigationTypes";
 import { RecoverPassScreen } from "../screens/RecoverPassScreen";
+import userStore from "../store/userStore";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -23,7 +24,7 @@ function MyTabs() {
     );
 }
 
-export const RootNavigator = () => {
+function AuthStack() {
     return (
         <Stack.Navigator
             initialRouteName="Login"
@@ -43,7 +44,19 @@ export const RootNavigator = () => {
                 component={RecoverPassScreen}
                 options={{ headerShown: false }}
             />
+        </Stack.Navigator>
+    );
+}
+
+function AppStack() {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="MyTabs" component={MyTabs} />
         </Stack.Navigator>
     );
+}
+
+export const RootNavigator = () => {
+    const { token } = userStore();
+    return <>{token && token.length > 0 ? <AppStack /> : <AuthStack />}</>;
 };
