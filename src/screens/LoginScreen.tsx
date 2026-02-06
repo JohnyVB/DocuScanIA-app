@@ -26,10 +26,10 @@ export const LoginScreen = () => {
     const navigation = useNavigation<LoginScreenNavigationProp>();
     const [loading, setLoading] = useState(false);
     const { email, password, onChangeForm } = useForm({
-        email: "johny.villegas.dev@gmail.com",
-        password: "johny23",
+        email: "",
+        password: "",
     });
-    const { setToken, token, setUserData } = userStore();
+    const { setToken, setUserData } = userStore();
 
     const handleLogin = async () => {
         if (!email || !password) {
@@ -114,9 +114,6 @@ export const LoginScreen = () => {
                         ¿No tienes una cuenta? Registrarse
                     </Text>
                 </TouchableOpacity>
-                {token && token.length > 0 && (
-                    <Text>Token actual: {token}</Text>
-                )}
             </View>
         </KeyboardAvoidingView>
     );

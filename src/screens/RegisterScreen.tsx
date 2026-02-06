@@ -25,10 +25,10 @@ export const RegisterScreen = () => {
     const navigation = useNavigation<RegisterScreenNavigationProp>();
     const [loading, setLoading] = useState(false);
     const { name, lastname, email, password, onChangeForm } = useForm({
-        name: "johny2",
-        lastname: "villegas2",
-        email: "johnyvgoog@gmail.com",
-        password: "johny123",
+        name: "",
+        lastname: "",
+        email: "",
+        password: "",
     });
 
     const handleRegister = async () => {

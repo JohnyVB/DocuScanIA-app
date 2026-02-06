@@ -32,7 +32,7 @@ export const RecoverPassScreen = () => {
     const [loading, setLoading] = useState(false);
     const [step, setStep] = useState<StepType>("email");
     const { email, code, password, confirmPassword, onChangeForm } = useForm({
-        email: "johny.villegas.dev@gmail.com",
+        email: "",
         code: "",
         password: "",
         confirmPassword: "",
