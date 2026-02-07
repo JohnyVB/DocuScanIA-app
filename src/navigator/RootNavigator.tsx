@@ -1,24 +1,29 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { LoginScreen } from "../screens/LoginScreen";
-import { ScanScreen } from "../screens/ScanScreen";
-import { DocumentsScreen } from "../screens/DocumentsScreen";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { ProfileScreen } from "../screens/ProfileScreen";
-import { RegisterScreen } from "../screens/RegisterScreen";
-import { RootStackParamList, TabParamList } from "../types/NavigationTypes";
-import { RecoverPassScreen } from "../screens/RecoverPassScreen";
-import userStore from "../store/userStore";
-import { isTokenExpired } from "../features/NavigatorFeature";
 import { Ionicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useTheme } from "../context/ThemeContext";
+import { isTokenExpired } from "../features/NavigatorFeature";
+import { DocumentsScreen } from "../screens/DocumentsScreen";
+import { LoginScreen } from "../screens/LoginScreen";
+import { ProfileScreen } from "../screens/ProfileScreen";
+import { RecoverPassScreen } from "../screens/RecoverPassScreen";
+import { RegisterScreen } from "../screens/RegisterScreen";
+import { ScanScreen } from "../screens/ScanScreen";
+import userStore from "../store/userStore";
+import { RootStackParamList, TabParamList } from "../types/NavigationTypes";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
 
 function MyTabs() {
+    const { colors } = useTheme();
     return (
         <Tab.Navigator
             initialRouteName="Scan"
-            screenOptions={{ headerShown: false }}>
+            screenOptions={{
+                headerShown: false,
+                tabBarStyle: { backgroundColor: colors.background },
+            }}>
             <Tab.Screen
                 name="Scan"
                 component={ScanScreen}
