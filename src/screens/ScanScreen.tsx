@@ -6,7 +6,7 @@ import { useTheme } from "../context/ThemeContext";
 import userStore from "../store/userStore";
 import ScanStyles from "../styles/ScanStyles";
 import { Ionicons } from "@expo/vector-icons";
-import { uploadDocument } from "../features/ScanFeature";
+import { onUploadDocument } from "../features/ScanFeature";
 
 export const ScanScreen = () => {
     const { token } = userStore();
@@ -34,7 +34,7 @@ export const ScanScreen = () => {
 
         console.log(photo.uri);
         // enviar al backend
-        const result = await uploadDocument(photo.uri, token!);
+        const result = await onUploadDocument(photo.uri, token!);
 
         console.log("Upload result:", result);
 

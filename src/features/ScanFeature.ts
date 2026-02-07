@@ -1,6 +1,6 @@
 import axiosInstance from "../services/axiosService";
 
-export const uploadDocument = async (uri: string, token: string) => {
+export const onUploadDocument = async (uri: string, token: string) => {
     const formData = new FormData();
 
     const fileName = uri.split("/").pop() || "document.jpg";
