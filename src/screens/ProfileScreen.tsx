@@ -5,6 +5,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import GlobalStyles from "../styles/GlobalStyles";
 import userStore from "../store/userStore";
 import { RootStackParamList } from "../types/NavigationTypes";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type ProfileScreenNavigationProp = NativeStackNavigationProp<
     RootStackParamList,
@@ -24,7 +25,7 @@ export const ProfileScreen = () => {
     };
 
     return (
-        <View style={GlobalStyles.container}>
+        <SafeAreaView style={GlobalStyles.container}>
             <Text>Profile Screen</Text>
             <Text>Token: {token}</Text>
             <Text>User Data: {JSON.stringify(userData, null, 2)}</Text>
@@ -43,6 +44,6 @@ export const ProfileScreen = () => {
                     </Text>
                 )}
             </TouchableOpacity>
-        </View>
+        </SafeAreaView>
     );
 };

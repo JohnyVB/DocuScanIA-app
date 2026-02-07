@@ -5,7 +5,6 @@ import userStore from "../store/userStore";
 
 export const ScanScreen = () => {
     const { token } = userStore();
-    console.log("ScanScreen Token:", token);
     return (
         <View style={GlobalStyles.container}>
             <Text>ScanScreen</Text>
