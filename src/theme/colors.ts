@@ -7,6 +7,8 @@ export type ThemeColors = {
     danger: string;
     border: string;
     textBtn: string;
+    inputBackground: string;
+    inputBorder: string;
 };
 
 export const lightColors = {
@@ -18,6 +20,8 @@ export const lightColors = {
     danger: "#EF4444",
     border: "#E5E7EB",
     textBtn: "#FFFFFF",
+    inputBackground: "#FFFFFF",
+    inputBorder: "#E5E7EB",
 };
 
 export const darkColors = {
@@ -29,4 +33,6 @@ export const darkColors = {
     danger: "#F87171",
     border: "#334155",
     textBtn: "#FFFFFF",
+    inputBackground: "#1E293B",
+    inputBorder: "#232c398b",
 };

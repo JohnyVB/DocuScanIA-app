@@ -17,7 +17,7 @@ import {
     onVerifyResetPasswordCodeFeature,
 } from "../features/RecoverPassFeature";
 import { useForm } from "../hooks/useForm";
-import GlobalStyles from "../styles/GlobalStyles";
+import GlobalStyles from "../styles/LoginStyles";
 import { RootStackParamList } from "../types/NavigationTypes";
 
 type RecoverPassScreenNavigationProp = NativeStackNavigationProp<

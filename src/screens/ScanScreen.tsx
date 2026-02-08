@@ -25,19 +25,12 @@ export const ScanScreen = () => {
 
     const takePicture = async () => {
         if (!cameraRef.current) return;
-
         setLoading(true);
-
         const photo = await cameraRef.current.takePictureAsync({
             quality: 0.8,
         });
-
-        console.log(photo.uri);
-        // enviar al backend
         const result = await onUploadDocument(photo.uri, token!);
-
         console.log("Upload result:", result);
-
         setLoading(false);
     };
 

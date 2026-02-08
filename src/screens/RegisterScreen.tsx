@@ -11,7 +11,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import GlobalStyles from "../styles/GlobalStyles";
+import GlobalStyles from "../styles/LoginStyles";
 import { useForm } from "../hooks/useForm";
 import { RootStackParamList } from "../types/NavigationTypes";
 import { onRegisterFeature } from "../features/RegisterFeature";
