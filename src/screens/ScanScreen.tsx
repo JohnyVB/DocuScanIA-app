@@ -16,6 +16,8 @@ export const ScanScreen = () => {
     const [permission, requestPermission] = useCameraPermissions();
     const [loading, setLoading] = useState(false);
     const cameraRef = useRef<CameraView>(null);
+    const [ErrorMessage, setErrorMessage] = useState<string>("");
+    const [document, setDocument] = useState({});
 
     useEffect(() => {
         if (!permission) {
@@ -29,8 +31,14 @@ export const ScanScreen = () => {
         const photo = await cameraRef.current.takePictureAsync({
             quality: 0.8,
         });
-        const result = await onUploadDocument(photo.uri, token!);
-        console.log("Upload result:", result);
+        const data = await onUploadDocument(photo.uri, token!);
+        if (data.status === "success") {
+            setDocument(data.newDoc);
+            console.log(data.newDoc);
+        } else {
+            setErrorMessage(data.message);
+        }
+        // console.log("Upload result:", result);
         setLoading(false);
     };
 

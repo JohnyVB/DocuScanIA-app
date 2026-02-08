@@ -28,6 +28,7 @@ export default {
             apiVerifyResetPasswordCodeUrl:
                 process.env.API_VERIFY_RESET_PASSWORD_CODE_URL,
             apiResetPasswordUrl: process.env.API_RESET_PASSWORD_URL,
+            apiUploadDocumentUrl: process.env.API_UPLOAD_DOCUMENT_URL,
         },
     },
 };

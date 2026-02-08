@@ -3,11 +3,7 @@ import { ThemeColors } from "../theme/colors";
 
 const ScanStyles = (colors: ThemeColors) =>
     StyleSheet.create({
-        container: {
-            flex: 1,
-            backgroundColor: colors.background,
-            paddingHorizontal: 20,
-        },
+        container: { flex: 1, backgroundColor: colors.background },
         title: {
             fontSize: 24,
             fontWeight: "bold",
@@ -18,7 +14,7 @@ const ScanStyles = (colors: ThemeColors) =>
             flex: 1,
             backgroundColor: colors.card,
             padding: 20,
-            marginVertical: 10,
+            marginTop: 10,
             alignContent: "center",
             justifyContent: "center",
         },
@@ -33,6 +29,8 @@ const ScanStyles = (colors: ThemeColors) =>
             paddingVertical: 14,
             borderRadius: 12,
             alignItems: "center",
+            width: "60%",
+            alignSelf: "center",
         },
         textBtnScan: { color: colors.textBtn, fontSize: 16, fontWeight: "600" },
         overlay: { flex: 1, justifyContent: "center", alignItems: "center" },
