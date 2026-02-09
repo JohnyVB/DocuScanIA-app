@@ -33,6 +33,11 @@ const ScanStyles = (colors: ThemeColors) =>
             alignSelf: "center",
         },
         textBtnScan: { color: colors.textBtn, fontSize: 16, fontWeight: "600" },
+        activityContainer: {
+            flex: 1,
+            justifyContent: "center", // vertical
+            alignItems: "center", // horizontal
+        },
         overlay: { flex: 1, justifyContent: "center", alignItems: "center" },
         scanBox: {
             width: "95%",
@@ -48,6 +53,17 @@ const ScanStyles = (colors: ThemeColors) =>
             backgroundColor: "#2563EB",
             width: 70,
             height: 70,
+            borderRadius: 35,
+            justifyContent: "center",
+            alignItems: "center",
+        },
+        sendBtn: {
+            position: "absolute",
+            bottom: 50,
+            right: 40,
+            backgroundColor: "green",
+            width: 50,
+            height: 50,
             borderRadius: 35,
             justifyContent: "center",
             alignItems: "center",

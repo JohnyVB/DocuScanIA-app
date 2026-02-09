@@ -1,23 +1,33 @@
 import { CameraView, useCameraPermissions } from "expo-camera";
 import React, { useEffect, useRef, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+    ActivityIndicator,
+    Alert,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "../context/ThemeContext";
 import userStore from "../store/userStore";
 import ScanStyles from "../styles/ScanStyles";
 import { Ionicons } from "@expo/vector-icons";
 import { onUploadDocument } from "../features/ScanFeature";
+import DocumentDetailCard from "../components/ScanScreen/DocumentDetailCard";
+import { DocumenTypes } from "../types/ScanTypes";
 
 export const ScanScreen = () => {
     const { token } = userStore();
     const { colors } = useTheme();
     const styles = ScanStyles(colors);
-    const [cameraActivated, setCameraActivated] = useState(false);
+    const [cameraActivated, setCameraActivated] = useState<boolean>(false);
     const [permission, requestPermission] = useCameraPermissions();
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState<boolean>(false);
     const cameraRef = useRef<CameraView>(null);
-    const [ErrorMessage, setErrorMessage] = useState<string>("");
-    const [document, setDocument] = useState({});
+    const [document, setDocument] = useState<DocumenTypes | null>(null);
+    const [photos, setPhotos] = useState<string[]>([]);
 
     useEffect(() => {
         if (!permission) {
@@ -25,55 +35,105 @@ export const ScanScreen = () => {
         }
     }, []);
 
-    const takePicture = async () => {
-        if (!cameraRef.current) return;
+    const sendPictures = async () => {
+        setCameraActivated(false);
         setLoading(true);
-        const photo = await cameraRef.current.takePictureAsync({
-            quality: 0.8,
-        });
-        const data = await onUploadDocument(photo.uri, token!);
+        const data = await onUploadDocument(photos, token!);
         if (data.status === "success") {
             setDocument(data.newDoc);
-            console.log(data.newDoc);
+            setLoading(false);
+            setPhotos([]);
         } else {
-            setErrorMessage(data.message);
+            setLoading(false);
+            Alert.alert(data.message);
         }
-        // console.log("Upload result:", result);
-        setLoading(false);
+    };
+
+    const takePicture = async () => {
+        if (!cameraRef.current) return;
+        const photo = await cameraRef.current.takePictureAsync({
+            quality: 0.8,
+            skipProcessing: false,
+        });
+        setPhotos((prev: string[]) => [...prev, photo.uri]);
     };
 
     return (
         <SafeAreaView style={styles.container} edges={["top"]}>
             <Text style={styles.title}>Scan</Text>
-            <View style={[styles.body, styles.shadow]}>
-                {!cameraActivated ? (
+            {!document ? (
+                <View style={[styles.body, styles.shadow]}>
+                    {!cameraActivated ? (
+                        !loading && !document ? (
+                            <TouchableOpacity
+                                style={styles.btnScan}
+                                onPress={() => setCameraActivated(true)}>
+                                <Text style={styles.textBtnScan}>
+                                    Activar cámara
+                                </Text>
+                            </TouchableOpacity>
+                        ) : loading && !document ? (
+                            <View style={styles.activityContainer}>
+                                <ActivityIndicator
+                                    size="large"
+                                    color={colors.text}
+                                />
+                            </View>
+                        ) : null
+                    ) : (
+                        <View style={StyleSheet.absoluteFill}>
+                            <CameraView
+                                ref={cameraRef}
+                                style={StyleSheet.absoluteFill}
+                                facing="back"
+                            />
+
+                            {/* Overlay scanner */}
+                            <View style={styles.overlay}>
+                                <View style={styles.scanBox} />
+                            </View>
+
+                            {/* Botón captura */}
+                            <TouchableOpacity
+                                style={styles.captureBtn}
+                                onPress={takePicture}>
+                                <Ionicons
+                                    name="camera"
+                                    size={28}
+                                    color="#fff"
+                                />
+                            </TouchableOpacity>
+                            {photos.length > 0 && (
+                                <TouchableOpacity
+                                    style={styles.sendBtn}
+                                    onPress={sendPictures}>
+                                    <Ionicons
+                                        name="send"
+                                        size={20}
+                                        color="#fff"
+                                    />
+                                </TouchableOpacity>
+                            )}
+                        </View>
+                    )}
+                </View>
+            ) : (
+                <ScrollView>
+                    <DocumentDetailCard
+                        createdAt={document.createdAt}
+                        imagesUri={document.imagesUri}
+                        data={document.data}
+                    />
                     <TouchableOpacity
                         style={styles.btnScan}
-                        onPress={() => setCameraActivated(true)}>
+                        onPress={() => {
+                            setCameraActivated(true);
+                            setDocument(null);
+                        }}>
                         <Text style={styles.textBtnScan}>Activar cámara</Text>
                     </TouchableOpacity>
-                ) : (
-                    <View style={StyleSheet.absoluteFill}>
-                        <CameraView
-                            ref={cameraRef}
-                            style={StyleSheet.absoluteFill}
-                            facing="back"
-                        />
-
-                        {/* Overlay scanner */}
-                        <View style={styles.overlay}>
-                            <View style={styles.scanBox} />
-                        </View>
-
-                        {/* Botón captura */}
-                        <TouchableOpacity
-                            style={styles.captureBtn}
-                            onPress={takePicture}>
-                            <Ionicons name="camera" size={28} color="#fff" />
-                        </TouchableOpacity>
-                    </View>
-                )}
-            </View>
+                </ScrollView>
+            )}
         </SafeAreaView>
     );
 };

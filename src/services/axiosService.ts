@@ -5,7 +5,7 @@ const { apiBaseUrl } = Constants.expoConfig?.extra || {};
 
 const axiosInstance = axios.create({
     baseURL: apiBaseUrl,
-    timeout: 20000,
+    timeout: 50000,
     headers: { "Content-Type": "application/json" },
 });
 

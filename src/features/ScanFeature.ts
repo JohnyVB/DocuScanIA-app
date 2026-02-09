@@ -3,16 +3,16 @@ import Constants from "expo-constants";
 
 const { apiUploadDocumentUrl } = Constants.expoConfig?.extra || {};
 
-export const onUploadDocument = async (uri: string, token: string) => {
+export const onUploadDocument = async (photos: string[], token: string) => {
     const formData = new FormData();
 
-    const fileName = uri.split("/").pop() || "document.jpg";
-
-    formData.append("image", {
-        uri,
-        name: fileName,
-        type: "image/jpeg",
-    } as any);
+    photos.forEach((imgUri, index) => {
+        formData.append("images", {
+            uri: imgUri,
+            type: "image/jpeg",
+            name: `page_${index}.jpg`,
+        } as any);
+    });
 
     try {
         const { data } = await axiosInstance.post(
