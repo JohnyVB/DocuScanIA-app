@@ -53,7 +53,6 @@ export default function DocumentDetailCard({
                                 <Image
                                     source={{ uri: item }}
                                     style={styles.image}
-                                    contentFit="cover"
                                 />
                             </TouchableOpacity>
                         )}
