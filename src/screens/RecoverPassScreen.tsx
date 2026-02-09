@@ -5,19 +5,19 @@ import {
     Alert,
     KeyboardAvoidingView,
     Platform,
-    StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
     View,
 } from "react-native";
+import { useTheme } from "../context/ThemeContext";
 import {
     onResetPasswordFeature,
     onSendResetPasswordCodeFeature,
     onVerifyResetPasswordCodeFeature,
 } from "../features/RecoverPassFeature";
 import { useForm } from "../hooks/useForm";
-import GlobalStyles from "../styles/LoginStyles";
+import LoginStyles from "../styles/LoginStyles";
 import { RootStackParamList } from "../types/NavigationTypes";
 
 type RecoverPassScreenNavigationProp = NativeStackNavigationProp<
@@ -37,6 +37,8 @@ export const RecoverPassScreen = () => {
         password: "",
         confirmPassword: "",
     });
+    const { colors } = useTheme();
+    const styles = LoginStyles(colors);
 
     const handleSendCode = async () => {
         if (!email.includes("@")) {
@@ -106,7 +108,7 @@ export const RecoverPassScreen = () => {
 
     return (
         <KeyboardAvoidingView
-            style={GlobalStyles.container}
+            style={styles.container}
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             keyboardVerticalOffset={80}>
             <Text style={styles.title}>DocuScanAI</Text>
@@ -123,11 +125,11 @@ export const RecoverPassScreen = () => {
                         autoCapitalize="none"
                     />
                     <TouchableOpacity
-                        style={GlobalStyles.btn}
+                        style={styles.btn}
                         onPress={handleSendCode}
                         disabled={loading}>
                         <Text style={{ color: "#fff", fontSize: 16 }}>
-                            Enviar Código de Verificación
+                            Enviar Código
                         </Text>
                     </TouchableOpacity>
                 </>
@@ -144,7 +146,7 @@ export const RecoverPassScreen = () => {
                         maxLength={6}
                     />
                     <TouchableOpacity
-                        style={GlobalStyles.btn}
+                        style={styles.btn}
                         onPress={handleVerifyCode}
                         disabled={loading}>
                         <Text style={{ color: "#fff", fontSize: 16 }}>
@@ -186,7 +188,7 @@ export const RecoverPassScreen = () => {
                         secureTextEntry
                     />
                     <TouchableOpacity
-                        style={GlobalStyles.btn}
+                        style={styles.btn}
                         onPress={handleResetPassword}
                         disabled={loading}>
                         <Text style={{ color: "#fff", fontSize: 16 }}>
@@ -204,29 +206,3 @@ export const RecoverPassScreen = () => {
         </KeyboardAvoidingView>
     );
 };
-
-const styles = StyleSheet.create({
-    title: {
-        fontSize: 32,
-        fontWeight: "bold",
-        marginBottom: 10,
-        color: "#333",
-    },
-    subtitle: { fontSize: 18, color: "#666", marginBottom: 30 },
-    input: {
-        width: "100%",
-        padding: 12,
-        borderWidth: 1,
-        borderColor: "#ddd",
-        borderRadius: 8,
-        marginBottom: 15,
-        backgroundColor: "#fff",
-    },
-    disabledInput: { backgroundColor: "#f0f0f0", color: "#a0a0a0" },
-    messagesContainer: {
-        marginTop: 20,
-        alignItems: "center",
-        flexDirection: "column",
-        gap: 10,
-    },
-});

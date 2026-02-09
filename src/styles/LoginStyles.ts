@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { ThemeColors } from "../theme/colors";
 
-const GlobalStyles = (colors: ThemeColors) =>
+const LoginStyles = (colors: ThemeColors) =>
     StyleSheet.create({
         container: {
             flex: 1,
@@ -46,6 +46,10 @@ const GlobalStyles = (colors: ThemeColors) =>
             flexDirection: "column",
             gap: 10,
         },
+        disabledInput: {
+            backgroundColor: colors.background,
+            color: colors.text,
+        },
     });
 
-export default GlobalStyles;
+export default LoginStyles;

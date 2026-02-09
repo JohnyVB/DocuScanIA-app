@@ -11,7 +11,7 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
-import GlobalStyles from "../styles/LoginStyles";
+import LoginStyles from "../styles/LoginStyles";
 import { onLoginFeature } from "../features/LoginFeature";
 import { useForm } from "../hooks/useForm";
 import userStore from "../store/userStore";
@@ -32,7 +32,7 @@ export const LoginScreen = () => {
     });
     const { setToken, setUserData } = userStore();
     const { colors } = useTheme();
-    const styles = GlobalStyles(colors);
+    const styles = LoginStyles(colors);
 
     const handleLogin = async () => {
         if (!email || !password) {

@@ -15,6 +15,8 @@ import GlobalStyles from "../styles/LoginStyles";
 import { useForm } from "../hooks/useForm";
 import { RootStackParamList } from "../types/NavigationTypes";
 import { onRegisterFeature } from "../features/RegisterFeature";
+import { useTheme } from "../context/ThemeContext";
+import LoginStyles from "../styles/LoginStyles";
 
 type RegisterScreenNavigationProp = NativeStackNavigationProp<
     RootStackParamList,
@@ -30,6 +32,8 @@ export const RegisterScreen = () => {
         email: "",
         password: "",
     });
+    const { colors } = useTheme();
+    const styles = LoginStyles(colors);
 
     const handleRegister = async () => {
         if (!name || !lastname || !email || !password) {
@@ -71,7 +75,7 @@ export const RegisterScreen = () => {
 
     return (
         <KeyboardAvoidingView
-            style={GlobalStyles.container}
+            style={styles.container}
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             keyboardVerticalOffset={80}>
             <Text style={styles.title}>DocuScanAI</Text>
@@ -80,6 +84,7 @@ export const RegisterScreen = () => {
             <TextInput
                 style={styles.input}
                 placeholder="Nombre"
+                placeholderTextColor={colors.textSecondary}
                 value={name}
                 onChangeText={(value) => onChangeForm(value, "name")}
                 autoCapitalize="words"
@@ -88,6 +93,7 @@ export const RegisterScreen = () => {
             <TextInput
                 style={styles.input}
                 placeholder="Apellido"
+                placeholderTextColor={colors.textSecondary}
                 value={lastname}
                 onChangeText={(value) => onChangeForm(value, "lastname")}
                 autoCapitalize="words"
@@ -96,6 +102,7 @@ export const RegisterScreen = () => {
             <TextInput
                 style={styles.input}
                 placeholder="Email"
+                placeholderTextColor={colors.textSecondary}
                 value={email}
                 onChangeText={(value) => onChangeForm(value, "email")}
                 keyboardType="email-address"
@@ -105,13 +112,14 @@ export const RegisterScreen = () => {
             <TextInput
                 style={styles.input}
                 placeholder="Contraseña"
+                placeholderTextColor={colors.textSecondary}
                 value={password}
                 onChangeText={(value) => onChangeForm(value, "password")}
                 secureTextEntry
             />
 
             <TouchableOpacity
-                style={GlobalStyles.btn}
+                style={styles.btn}
                 onPress={handleRegister}
                 disabled={loading}>
                 {loading ? (
@@ -127,7 +135,7 @@ export const RegisterScreen = () => {
 
             <View style={styles.messagesContainer}>
                 <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-                    <Text style={{ color: "blue" }}>
+                    <Text style={{ color: colors.primary }}>
                         ¿Ya tienes una cuenta? Iniciar Sesión
                     </Text>
                 </TouchableOpacity>
@@ -135,28 +143,3 @@ export const RegisterScreen = () => {
         </KeyboardAvoidingView>
     );
 };
-
-const styles = StyleSheet.create({
-    title: {
-        fontSize: 32,
-        fontWeight: "bold",
-        marginBottom: 10,
-        color: "#333",
-    },
-    subtitle: { fontSize: 18, color: "#666", marginBottom: 30 },
-    input: {
-        width: "100%",
-        padding: 12,
-        borderWidth: 1,
-        borderColor: "#ddd",
-        borderRadius: 8,
-        marginBottom: 15,
-        backgroundColor: "#fff",
-    },
-    messagesContainer: {
-        marginTop: 20,
-        alignItems: "center",
-        flexDirection: "column",
-        gap: 10,
-    },
-});
