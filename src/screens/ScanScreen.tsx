@@ -16,9 +16,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import DocumentDetailCard from "../components/ScanScreen/DocumentDetailCard";
 import { useTheme } from "../context/ThemeContext";
 import { onUploadDocument } from "../features/ScanFeature";
+import documentStore from "../store/documentStore";
 import userStore from "../store/userStore";
 import ScanStyles from "../styles/ScanStyles";
-import { DocumenTypes } from "../types/ScanTypes";
+import { DocumentProps } from "../types/DocumentType";
 
 export const ScanScreen = () => {
     const { token } = userStore();
@@ -28,8 +29,9 @@ export const ScanScreen = () => {
     const [permission, requestPermission] = useCameraPermissions();
     const [loading, setLoading] = useState<boolean>(false);
     const cameraRef = useRef<CameraView>(null);
-    const [document, setDocument] = useState<DocumenTypes | null>(null);
     const [photos, setPhotos] = useState<string[]>([]);
+    const [document, setDocument] = useState<DocumentProps | null>(null);
+    const { documents, setDocuments } = documentStore();
 
     useEffect(() => {
         if (!permission) {
@@ -42,7 +44,9 @@ export const ScanScreen = () => {
         setLoading(true);
         const data = await onUploadDocument(photos, token!);
         if (data.status === "success") {
-            setDocument(data.newDoc);
+            const newDocument: DocumentProps = data.newDoc;
+            setDocument(newDocument);
+            setDocuments([newDocument, ...documents]);
             setLoading(false);
             setPhotos([]);
         } else {
@@ -151,12 +155,7 @@ export const ScanScreen = () => {
                 </View>
             ) : (
                 <ScrollView>
-                    <DocumentDetailCard
-                        uid={document.uid}
-                        createdAt={document.createdAt}
-                        imagesUri={document.imagesUri}
-                        data={document.data}
-                    />
+                    <DocumentDetailCard document={document} />
                     <TouchableOpacity
                         style={styles.btnScan}
                         onPress={() => {

@@ -2,7 +2,8 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import DocumentCardStyles from "../styles/DocumentCardStyles";
-import { DocumentProps } from "../types/DocumentDetailCardTypes";
+import { DocumentProps } from "../types/DocumentType";
+import { formatDateToDisplay } from "../helper/FormatDateHelper";
 
 type DocumentCardProps = { document: DocumentProps };
 
@@ -30,7 +31,9 @@ export const DocumentCard = ({ document }: DocumentCardProps) => {
                 )}
                 <Text style={styles.address}>📍 {data.address}</Text>
                 <View style={styles.footer}>
-                    <Text style={styles.createdAt}>📅 {createdAt}</Text>
+                    <Text style={styles.createdAt}>
+                        📅 {formatDateToDisplay(createdAt)}
+                    </Text>
                     <Text
                         style={[
                             styles.importance,

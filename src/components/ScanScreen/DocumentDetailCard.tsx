@@ -9,14 +9,15 @@ import {
 } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 import DocumentDetailCardStyles from "../../styles/DocumentDetailCardStyles";
-import { DocumentProps } from "../../types/DocumentDetailCardTypes";
+import { DocumentProps } from "../../types/DocumentType";
 import { Image } from "expo-image";
+import { formatDateToDisplay } from "../../helper/FormatDateHelper";
+
+type DocumentDetailCardProps = { document: DocumentProps };
 
 export default function DocumentDetailCard({
-    createdAt,
-    imagesUri,
-    data,
-}: DocumentProps) {
+    document,
+}: DocumentDetailCardProps) {
     const { colors } = useTheme();
     const styles = DocumentDetailCardStyles(colors);
     const [modalVisible, setModalVisible] = useState(false);
@@ -35,13 +36,17 @@ export default function DocumentDetailCard({
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <View style={styles.card}>
-                <Text style={styles.title}>{data.document_type}</Text>
-                <Text style={styles.meta}>Categoría: {data.category}</Text>
-                <Text style={styles.meta}>Creado: {createdAt}</Text>
+                <Text style={styles.title}>{document.data.document_type}</Text>
+                <Text style={styles.meta}>
+                    Categoría: {document.data.category}
+                </Text>
+                <Text style={styles.meta}>
+                    Creado: {formatDateToDisplay(document.createdAt)}
+                </Text>
 
-                {imagesUri?.length > 0 && (
+                {document.imagesUri?.length > 0 && (
                     <FlatList
-                        data={imagesUri}
+                        data={document.imagesUri}
                         horizontal
                         pagingEnabled
                         showsHorizontalScrollIndicator={false}
@@ -60,11 +65,11 @@ export default function DocumentDetailCard({
                 )}
 
                 <Section title="Resumen">
-                    <Text style={styles.text}>{data.summary}</Text>
+                    <Text style={styles.text}>{document.data.summary}</Text>
                 </Section>
 
                 <Section title="Personas mencionadas">
-                    {data.people_mentioned.map((p, index) => (
+                    {document.data.people_mentioned.map((p, index) => (
                         <View key={index} style={styles.listItem}>
                             <Text style={styles.bold}>{p.name}</Text>
                             <Text style={styles.textSecondary}>{p.role}</Text>
@@ -74,7 +79,7 @@ export default function DocumentDetailCard({
 
                 <Section title="Fechas importantes">
                     <View style={styles.timeline}>
-                        {data.important_dates.map((d, index) => (
+                        {document.data.important_dates.map((d, index) => (
                             <View key={index} style={styles.timelineItem}>
                                 <View style={styles.timelineDot} />
                                 <View style={styles.timelineContent}>
@@ -90,17 +95,19 @@ export default function DocumentDetailCard({
 
                 <Section title="Datos adicionales">
                     <Text style={styles.text}>
-                        Número de documento: {data.document_number}
+                        Número de documento: {document.data.document_number}
                     </Text>
-                    <Text style={styles.text}>Dirección: {data.address}</Text>
+                    <Text style={styles.text}>
+                        Dirección: {document.data.address}
+                    </Text>
                     <Text
                         style={[
                             styles.text,
-                            data.importance_level === "high"
+                            document.data.importance_level === "high"
                                 ? { color: colors.danger }
                                 : { color: colors.primary },
                         ]}>
-                        Nivel de importancia: {data.importance_level}
+                        Nivel de importancia: {document.data.importance_level}
                     </Text>
                 </Section>
             </View>

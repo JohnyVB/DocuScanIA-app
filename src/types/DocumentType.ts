@@ -16,6 +16,7 @@ export type DocumentData = {
 export type DocumentProps = {
     uid: string;
     createdAt: string;
+    ownerId: string;
     imagesUri: string[];
     data: DocumentData;
 };

@@ -4,16 +4,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { DocumentCard } from "../components/DocumentCard";
 import { useTheme } from "../context/ThemeContext";
 import { onDocumentsByUserId } from "../features/DocumentsFeature";
+import documentStore from "../store/documentStore";
 import userStore from "../store/userStore";
 import DocumentsStyles from "../styles/DocumentsStyles";
-import { DocumentProps } from "../types/DocumentDetailCardTypes";
 
 export const DocumentsScreen = () => {
     const { token } = userStore();
     const { colors } = useTheme();
     const styles = DocumentsStyles(colors);
     const [loading, setLoading] = useState<boolean>(true);
-    const [documents, setDocuments] = useState<DocumentProps[]>([]);
+    const { documents, setDocuments } = documentStore();
 
     const getDocuments = async () => {
         setLoading(true);
@@ -36,6 +36,10 @@ export const DocumentsScreen = () => {
             {documents.length === 0 && loading ? (
                 <View style={styles.activityContainer}>
                     <ActivityIndicator size="large" color={colors.text} />
+                </View>
+            ) : documents.length === 0 && !loading ? (
+                <View style={styles.noDataContainer}>
+                    <Text style={styles.subTitle}>No hay documentos</Text>
                 </View>
             ) : (
                 <FlatList

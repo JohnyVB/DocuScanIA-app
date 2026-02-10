@@ -25,6 +25,12 @@ const DocumentsStyles = (colors: ThemeColors) =>
             justifyContent: "center", // vertical
             alignItems: "center", // horizontal
         },
+        noDataContainer: {
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+        },
+        subTitle: { color: colors.text, fontSize: 16 },
     });
 
 export default DocumentsStyles;

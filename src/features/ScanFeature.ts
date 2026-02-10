@@ -32,7 +32,7 @@ export const onUploadDocument = async (photos: string[], token: string) => {
         return {
             success: false,
             message: "Error al subir la imagen",
-            newDoc: null,
+            newDoc: [],
         };
     }
 };
