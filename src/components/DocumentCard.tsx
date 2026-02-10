@@ -31,7 +31,15 @@ export const DocumentCard = ({ document }: DocumentCardProps) => {
                 <Text style={styles.address}>📍 {data.address}</Text>
                 <View style={styles.footer}>
                     <Text style={styles.createdAt}>📅 {createdAt}</Text>
-                    <Text style={[styles.importance]}>
+                    <Text
+                        style={[
+                            styles.importance,
+                            data.importance_level === "low"
+                                ? styles.low
+                                : data.importance_level === "medium"
+                                  ? styles.medium
+                                  : styles.high,
+                        ]}>
                         {data.importance_level}
                     </Text>
                 </View>

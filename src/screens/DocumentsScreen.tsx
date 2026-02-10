@@ -47,6 +47,7 @@ export const DocumentsScreen = () => {
                 <FlatList
                     data={documents}
                     style={{ marginTop: 20 }}
+                    showsVerticalScrollIndicator={false}
                     keyExtractor={(item) => item.uid}
                     renderItem={({ item }) => <DocumentCard document={item} />}
                 />
