@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ProfileItem from "../components/ProfileScreen/ProfileItem";
+import ThemeToggle from "../components/ProfileScreen/ThemeToggle";
+import { useTheme } from "../context/ThemeContext";
 import userStore from "../store/userStore";
 import ProfileStyles from "../styles/ProfileStyles";
 import { ProfileScreenNavigationProp } from "../types/ProfileTypes";
-import { useTheme } from "../context/ThemeContext";
-import ThemeToggle from "../components/ProfileScreen/ThemeToggle";
 
 export const ProfileScreen = () => {
     const [loading, setLoading] = useState(false);

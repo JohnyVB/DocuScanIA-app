@@ -5,18 +5,16 @@ import {
     Alert,
     KeyboardAvoidingView,
     Platform,
-    StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
     View,
 } from "react-native";
-import GlobalStyles from "../styles/LoginStyles";
-import { useForm } from "../hooks/useForm";
-import { RootStackParamList } from "../types/NavigationTypes";
-import { onRegisterFeature } from "../features/RegisterFeature";
 import { useTheme } from "../context/ThemeContext";
+import { onRegisterFeature } from "../features/RegisterFeature";
+import { useForm } from "../hooks/useForm";
 import LoginStyles from "../styles/LoginStyles";
+import { RootStackParamList } from "../types/NavigationTypes";
 
 type RegisterScreenNavigationProp = NativeStackNavigationProp<
     RootStackParamList,

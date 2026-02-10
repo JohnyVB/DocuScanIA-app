@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -12,12 +13,11 @@ import {
     View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import DocumentDetailCard from "../components/ScanScreen/DocumentDetailCard";
 import { useTheme } from "../context/ThemeContext";
+import { onUploadDocument } from "../features/ScanFeature";
 import userStore from "../store/userStore";
 import ScanStyles from "../styles/ScanStyles";
-import { Ionicons } from "@expo/vector-icons";
-import { onUploadDocument } from "../features/ScanFeature";
-import DocumentDetailCard from "../components/ScanScreen/DocumentDetailCard";
 import { DocumenTypes } from "../types/ScanTypes";
 
 export const ScanScreen = () => {
@@ -89,13 +89,9 @@ export const ScanScreen = () => {
                                 style={StyleSheet.absoluteFill}
                                 facing="back"
                             />
-
-                            {/* Overlay scanner */}
                             <View style={styles.overlay}>
                                 <View style={styles.scanBox} />
                             </View>
-
-                            {/* Botón captura */}
                             <TouchableOpacity
                                 style={styles.captureBtn}
                                 onPress={takePicture}>
@@ -139,7 +135,6 @@ export const ScanScreen = () => {
                                     )}
                                 />
                             </View>
-
                             {photos.length > 0 && (
                                 <TouchableOpacity
                                     style={styles.sendBtn}

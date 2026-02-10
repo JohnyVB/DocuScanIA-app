@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
-import {
-    ActivityIndicator,
-    FlatList,
-    ScrollView,
-    Text,
-    View,
-} from "react-native";
+import { ActivityIndicator, FlatList, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { DocumentCard } from "../components/DocumentCard";
 import { useTheme } from "../context/ThemeContext";
+import { onDocumentsByUserId } from "../features/DocumentsFeature";
+import userStore from "../store/userStore";
 import DocumentsStyles from "../styles/DocumentsStyles";
 import { DocumentProps } from "../types/DocumentDetailCardTypes";
-import userStore from "../store/userStore";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { onDocumentsByUserId } from "../features/DocumentsFeature";
-import { DocumentCard } from "../components/DocumentCard";
 
 export const DocumentsScreen = () => {
     const { token } = userStore();
