@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import {
     ActivityIndicator,
     Alert,
+    FlatList,
+    Image,
     ScrollView,
     StyleSheet,
     Text,
@@ -99,10 +101,45 @@ export const ScanScreen = () => {
                                 onPress={takePicture}>
                                 <Ionicons
                                     name="camera"
-                                    size={28}
+                                    size={24}
                                     color="#fff"
                                 />
                             </TouchableOpacity>
+                            <View style={styles.previewContainer}>
+                                <FlatList
+                                    data={photos}
+                                    keyExtractor={(item, index) => item + index}
+                                    horizontal
+                                    showsHorizontalScrollIndicator={false}
+                                    renderItem={({ item, index }) => (
+                                        <View style={styles.previewItem}>
+                                            <Image
+                                                source={{ uri: item }}
+                                                style={styles.previewImage}
+                                            />
+
+                                            {/* eliminar foto */}
+                                            <TouchableOpacity
+                                                style={styles.removePhotoBtn}
+                                                onPress={() =>
+                                                    setPhotos((prev) =>
+                                                        prev.filter(
+                                                            (_, i) =>
+                                                                i !== index,
+                                                        ),
+                                                    )
+                                                }>
+                                                <Ionicons
+                                                    name="close"
+                                                    size={16}
+                                                    color="#fff"
+                                                />
+                                            </TouchableOpacity>
+                                        </View>
+                                    )}
+                                />
+                            </View>
+
                             {photos.length > 0 && (
                                 <TouchableOpacity
                                     style={styles.sendBtn}
