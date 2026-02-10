@@ -1,5 +1,6 @@
 export type ThemeColors = {
     background: string;
+    cardBackground: string;
     card: string;
     text: string;
     textSecondary: string;
@@ -13,7 +14,8 @@ export type ThemeColors = {
 
 export const lightColors = {
     background: "#F9FAFB",
-    card: "#FFFFFF",
+    cardBackground: "#d6d9e0",
+    card: "#ffffff",
     text: "#111827",
     textSecondary: "#6B7280",
     primary: "#4F46E5",
@@ -26,6 +28,7 @@ export const lightColors = {
 
 export const darkColors = {
     background: "#0F172A",
+    cardBackground: "#1E293B",
     card: "#1E293B",
     text: "#F8FAFC",
     textSecondary: "#94A3B8",

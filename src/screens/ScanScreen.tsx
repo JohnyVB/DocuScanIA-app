@@ -120,6 +120,7 @@ export const ScanScreen = () => {
             ) : (
                 <ScrollView>
                     <DocumentDetailCard
+                        uid={document.uid}
                         createdAt={document.createdAt}
                         imagesUri={document.imagesUri}
                         data={document.data}

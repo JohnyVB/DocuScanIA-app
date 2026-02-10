@@ -9,14 +9,14 @@ import {
 } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 import DocumentDetailCardStyles from "../../styles/DocumentDetailCardStyles";
-import { Props } from "../../types/DocumentDetailCardTypes";
+import { DocumentProps } from "../../types/DocumentDetailCardTypes";
 import { Image } from "expo-image";
 
 export default function DocumentDetailCard({
     createdAt,
     imagesUri,
     data,
-}: Props) {
+}: DocumentProps) {
     const { colors } = useTheme();
     const styles = DocumentDetailCardStyles(colors);
     const [modalVisible, setModalVisible] = useState(false);

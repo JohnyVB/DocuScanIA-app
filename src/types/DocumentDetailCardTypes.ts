@@ -2,7 +2,7 @@ type Person = { name: string; role: string };
 
 type ImportantDate = { date: string; description: string };
 
-type DocumentData = {
+export type DocumentData = {
     document_type: string;
     category: string;
     summary: string;
@@ -13,7 +13,8 @@ type DocumentData = {
     importance_level: string;
 };
 
-export type Props = {
+export type DocumentProps = {
+    uid: string;
     createdAt: string;
     imagesUri: string[];
     data: DocumentData;
