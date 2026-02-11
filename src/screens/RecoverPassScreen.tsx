@@ -14,7 +14,7 @@ import {
     onResetPasswordFeature,
     onSendResetPasswordCodeFeature,
     onVerifyResetPasswordCodeFeature,
-} from "../features/RecoverPassFeature";
+} from "../services/RecoverPassService";
 import { useForm } from "../hooks/useForm";
 import LoginStyles from "../styles/LoginStyles";
 import { RecoverPassScreenNavigationProp } from "../types/NavigationTypes";

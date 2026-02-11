@@ -14,7 +14,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import DocumentDetailCard from "../components/ScanScreen/DocumentDetailCard";
 import { useTheme } from "../context/ThemeContext";
-import { onUploadDocument } from "../features/ScanFeature";
+import { onUploadDocument } from "../services/ScanService";
 import documentStore from "../store/documentStore";
 import userStore from "../store/userStore";
 import ScanStyles from "../styles/ScanStyles";
@@ -45,7 +45,6 @@ export const ScanScreen = () => {
         const data = await onUploadDocument(photos, token!);
         if (data.status === "success") {
             const newDocument: DocumenTypes = data.newDoc;
-            console.log(JSON.stringify(newDocument, null, 2));
             setDocument(newDocument);
             setDocuments([newDocument, ...documents]);
             setLoading(false);

@@ -10,7 +10,7 @@ import {
     View,
 } from "react-native";
 import { useTheme } from "../context/ThemeContext";
-import { onRegisterFeature } from "../features/RegisterFeature";
+import { onRegisterFeature } from "../services/RegisterService";
 import { useForm } from "../hooks/useForm";
 import LoginStyles from "../styles/LoginStyles";
 import { RegisterScreenNavigationProp } from "../types/NavigationTypes";

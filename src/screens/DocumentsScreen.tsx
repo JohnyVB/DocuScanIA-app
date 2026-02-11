@@ -3,7 +3,7 @@ import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { DocumentCard } from "../components/DocumentCard";
 import { useTheme } from "../context/ThemeContext";
-import { onDocumentsByUserId } from "../features/DocumentsFeature";
+import { onDocumentsByUserId } from "../services/DocumentsService";
 import documentStore from "../store/documentStore";
 import userStore from "../store/userStore";
 import DocumentsStyles from "../styles/DocumentsStyles";
@@ -19,7 +19,6 @@ export const DocumentsScreen = () => {
         setLoading(true);
         const data = await onDocumentsByUserId(token!);
         if (data.status === "success") {
-            console.log(JSON.stringify(data.documents, null, 2));
             setDocuments(data.documents);
         } else {
             setDocuments([]);

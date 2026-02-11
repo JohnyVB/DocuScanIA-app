@@ -2,7 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useTheme } from "../context/ThemeContext";
-import { isTokenExpired } from "../features/NavigatorFeature";
+import { isTokenExpired } from "../services/NavigatorService";
 import { DocumentDetailScreen } from "../screens/DocumentDetailScreen";
 import { DocumentsScreen } from "../screens/DocumentsScreen";
 import { LoginScreen } from "../screens/LoginScreen";

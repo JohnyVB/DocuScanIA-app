@@ -1,4 +1,4 @@
-import axiosInstance from "../services/axiosService";
+import axiosInstance from "../config/axiosService";
 import Constants from "expo-constants";
 
 const { apiDocumentsByUserId } = Constants.expoConfig?.extra || {};

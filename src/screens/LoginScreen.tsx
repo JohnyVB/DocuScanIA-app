@@ -11,7 +11,7 @@ import {
     View,
 } from "react-native";
 import { useTheme } from "../context/ThemeContext";
-import { onLoginFeature } from "../features/LoginFeature";
+import { onLoginFeature } from "../services/LoginService";
 import { useForm } from "../hooks/useForm";
 import userStore from "../store/userStore";
 import LoginStyles from "../styles/LoginStyles";
