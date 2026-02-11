@@ -64,7 +64,7 @@ const ScanStyles = (colors: ThemeColors) =>
             paddingHorizontal: 10,
         },
 
-        previewItem: { marginRight: 10, position: "relative" },
+        previewItem: { margin: 10 },
 
         previewImage: {
             width: 70,
@@ -81,6 +81,7 @@ const ScanStyles = (colors: ThemeColors) =>
             backgroundColor: "rgba(0,0,0,0.7)",
             borderRadius: 12,
             padding: 2,
+            zIndex: 999,
         },
         sendBtn: {
             position: "absolute",

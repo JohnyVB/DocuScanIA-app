@@ -95,7 +95,6 @@ export const ScanScreen = () => {
                                             source={{ uri: item }}
                                             style={styles.previewImage}
                                         />
-
                                         {/* eliminar foto */}
                                         <TouchableOpacity
                                             style={styles.removePhotoBtn}
