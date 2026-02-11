@@ -1,3 +1,4 @@
+import { Image } from "expo-image";
 import React, { useState } from "react";
 import {
     FlatList,
@@ -8,12 +9,11 @@ import {
     View,
 } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
-import DocumentDetailCardStyles from "../../styles/DocumentDetailCardStyles";
-import { DocumentProps } from "../../types/DocumentType";
-import { Image } from "expo-image";
 import { formatDateToDisplay } from "../../helper/FormatDateHelper";
+import DocumentDetailCardStyles from "../../styles/DocumentDetailCardStyles";
+import { DocumenTypes } from "../../types/DocumentType";
 
-type DocumentDetailCardProps = { document: DocumentProps };
+type DocumentDetailCardProps = { document: DocumenTypes };
 
 export default function DocumentDetailCard({
     document,

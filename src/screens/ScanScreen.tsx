@@ -3,7 +3,6 @@ import { CameraView, useCameraPermissions } from "expo-camera";
 import React, { useEffect, useRef, useState } from "react";
 import {
     ActivityIndicator,
-    Alert,
     FlatList,
     Image,
     ScrollView,
@@ -19,7 +18,7 @@ import { onUploadDocument } from "../features/ScanFeature";
 import documentStore from "../store/documentStore";
 import userStore from "../store/userStore";
 import ScanStyles from "../styles/ScanStyles";
-import { DocumentProps } from "../types/DocumentType";
+import { DocumenTypes } from "../types/DocumentType";
 
 export const ScanScreen = () => {
     const { token } = userStore();
@@ -29,7 +28,7 @@ export const ScanScreen = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const cameraRef = useRef<CameraView>(null);
     const [photos, setPhotos] = useState<string[]>([]);
-    const [document, setDocument] = useState<DocumentProps | null>(null);
+    const [document, setDocument] = useState<DocumenTypes | null>(null);
     const { documents, setDocuments } = documentStore();
     const [scanStatus, setScanStatus] = useState<boolean>(true);
     const [errorMessage, setErrorMessage] = useState<string>("");
@@ -45,7 +44,7 @@ export const ScanScreen = () => {
         setLoading(true);
         const data = await onUploadDocument(photos, token!);
         if (data.status === "success") {
-            const newDocument: DocumentProps = data.newDoc;
+            const newDocument: DocumenTypes = data.newDoc;
             setDocument(newDocument);
             setDocuments([newDocument, ...documents]);
             setLoading(false);

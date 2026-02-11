@@ -2,10 +2,10 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import DocumentCardStyles from "../styles/DocumentCardStyles";
-import { DocumentProps } from "../types/DocumentType";
 import { formatDateToDisplay } from "../helper/FormatDateHelper";
+import { DocumenTypes } from "../types/DocumentType";
 
-type DocumentCardProps = { document: DocumentProps };
+type DocumentCardProps = { document: DocumenTypes };
 
 export const DocumentCard = ({ document }: DocumentCardProps) => {
     const { createdAt, data } = document;

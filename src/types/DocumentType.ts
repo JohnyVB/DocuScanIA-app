@@ -1,22 +1,30 @@
-type Person = { name: string; role: string };
+export interface PeopleMentioned {
+    name: string;
+    role: string;
+}
 
-type ImportantDate = { date: string; description: string };
+export interface ImportantDate {
+    date: string;
+    description: string;
+}
 
 export type DocumentData = {
     document_type: string;
     category: string;
     summary: string;
-    people_mentioned: Person[];
+    people_mentioned: PeopleMentioned[];
     important_dates: ImportantDate[];
     document_number: string;
     address: string;
+    requires_action: boolean;
+    recommended_action: string;
     importance_level: string;
 };
 
-export type DocumentProps = {
+export type DocumenTypes = {
     uid: string;
-    createdAt: string;
     ownerId: string;
     imagesUri: string[];
+    createdAt: string;
     data: DocumentData;
 };
