@@ -23,4 +23,9 @@ export const DocumentDetailScreenStyles = (colors: ThemeColors) =>
         buttonText: { color: colors.textBtn, fontSize: 16, fontWeight: "600" },
         buttonDelete: { backgroundColor: colors.danger },
         buttonGoBack: { backgroundColor: colors.primary },
+        activityContainer: {
+            flex: 1,
+            justifyContent: "center", // vertical
+            alignItems: "center", // horizontal
+        },
     });

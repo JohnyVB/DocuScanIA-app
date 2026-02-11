@@ -30,6 +30,7 @@ export default {
             apiResetPasswordUrl: process.env.API_RESET_PASSWORD_URL,
             apiUploadDocumentUrl: process.env.API_UPLOAD_DOCUMENT_URL,
             apiDocumentsByUserId: process.env.API_DOCUMENTS_BY_USER_ID,
+            apiDeleteDocumentById: process.env.API_DELETE_DOCUMENT_BY_ID,
         },
     },
 };
