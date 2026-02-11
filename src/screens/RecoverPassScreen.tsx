@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import {
     Alert,
@@ -18,12 +17,7 @@ import {
 } from "../features/RecoverPassFeature";
 import { useForm } from "../hooks/useForm";
 import LoginStyles from "../styles/LoginStyles";
-import { RootStackParamList } from "../types/NavigationTypes";
-
-type RecoverPassScreenNavigationProp = NativeStackNavigationProp<
-    RootStackParamList,
-    "RecoverPass"
->;
+import { RecoverPassScreenNavigationProp } from "../types/NavigationTypes";
 
 type StepType = "email" | "code" | "reset";
 
@@ -103,7 +97,7 @@ export const RecoverPassScreen = () => {
             return;
         }
         setLoading(false);
-        navigation.navigate("Login");
+        navigation.navigate("LoginScreen");
     };
 
     return (

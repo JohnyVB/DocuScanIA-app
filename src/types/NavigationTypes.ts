@@ -1,24 +1,52 @@
+import { RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { DocumenTypes } from "./DocumentType";
 
 export type RootStackParamList = {
-    Login: undefined;
-    Register: undefined;
-    RecoverPass: undefined;
+    LoginScreen: undefined;
+    RegisterScreen: undefined;
+    RecoverPassScreen: undefined;
     MyTabs: undefined;
-    Scan: undefined;
-    Documents: undefined;
-    Profile: undefined;
+    ScanScreen: undefined;
+    ProfileScreen: undefined;
+    DocumentStack: undefined;
+    DocumentsScreen: undefined;
+    DocumentDetailScreen: { document: DocumenTypes };
 };
 
 export type TabParamList = {
-    Scan: undefined;
-    Documents: undefined;
-    Profile: undefined;
+    ScanScreen: undefined;
+    DocumentStack: undefined;
+    ProfileScreen: undefined;
 };
 
-export type ProfileScreenNavigationProp = NativeStackNavigationProp<
+export type LoginScreenNavigationProp = NativeStackNavigationProp<
     RootStackParamList,
-    "Profile"
+    "LoginScreen"
+>;
+
+export type RecoverPassScreenNavigationProp = NativeStackNavigationProp<
+    RootStackParamList,
+    "RecoverPassScreen"
+>;
+
+export type RegisterScreenNavigationProp = NativeStackNavigationProp<
+    RootStackParamList,
+    "RegisterScreen"
+>;
+
+export type DocumentsScreenNavigationProp = NativeStackNavigationProp<
+    RootStackParamList,
+    "DocumentsScreen"
+>;
+
+export type DocumentDetailScreenNavigationProp = NativeStackNavigationProp<
+    RootStackParamList,
+    "DocumentDetailScreen"
+>;
+export type DocumentDetailScreenRouteProp = RouteProp<
+    RootStackParamList,
+    "DocumentDetailScreen"
 >;
 
 export type ProfileItemProps = { label: string; value: string };

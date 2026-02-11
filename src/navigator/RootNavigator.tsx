@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useTheme } from "../context/ThemeContext";
 import { isTokenExpired } from "../features/NavigatorFeature";
+import { DocumentDetailScreen } from "../screens/DocumentDetailScreen";
 import { DocumentsScreen } from "../screens/DocumentsScreen";
 import { LoginScreen } from "../screens/LoginScreen";
 import { ProfileScreen } from "../screens/ProfileScreen";
@@ -15,17 +16,36 @@ import { RootStackParamList, TabParamList } from "../types/NavigationTypes";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
 
+function DocumentStack() {
+    return (
+        <Stack.Navigator
+            initialRouteName="DocumentsScreen"
+            screenOptions={{ headerShown: false }}>
+            <Stack.Screen
+                name="DocumentsScreen"
+                component={DocumentsScreen}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="DocumentDetailScreen"
+                component={DocumentDetailScreen}
+                options={{ headerShown: false }}
+            />
+        </Stack.Navigator>
+    );
+}
+
 function MyTabs() {
     const { colors } = useTheme();
     return (
         <Tab.Navigator
-            initialRouteName="Scan"
+            initialRouteName="ScanScreen"
             screenOptions={{
                 headerShown: false,
                 tabBarStyle: { backgroundColor: colors.background },
             }}>
             <Tab.Screen
-                name="Scan"
+                name="ScanScreen"
                 component={ScanScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (
@@ -38,8 +58,8 @@ function MyTabs() {
                 }}
             />
             <Tab.Screen
-                name="Documents"
-                component={DocumentsScreen}
+                name="DocumentStack"
+                component={DocumentStack}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Ionicons
@@ -51,7 +71,7 @@ function MyTabs() {
                 }}
             />
             <Tab.Screen
-                name="Profile"
+                name="ProfileScreen"
                 component={ProfileScreen}
                 options={{
                     tabBarIcon: ({ focused }) => (
@@ -70,20 +90,20 @@ function MyTabs() {
 function AuthStack() {
     return (
         <Stack.Navigator
-            initialRouteName="Login"
+            initialRouteName="LoginScreen"
             screenOptions={{ headerShown: false }}>
             <Stack.Screen
-                name="Login"
+                name="LoginScreen"
                 component={LoginScreen}
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="Register"
+                name="RegisterScreen"
                 component={RegisterScreen}
                 options={{ headerShown: false }}
             />
             <Stack.Screen
-                name="RecoverPass"
+                name="RecoverPassScreen"
                 component={RecoverPassScreen}
                 options={{ headerShown: false }}
             />
@@ -101,7 +121,5 @@ function AppStack() {
 
 export const RootNavigator = () => {
     const { token } = userStore();
-    return (
-        <>{!token || isTokenExpired(token) ? <AuthStack /> : <AppStack />}</>
-    );
+    return !token || isTokenExpired(token) ? <AuthStack /> : <AppStack />;
 };

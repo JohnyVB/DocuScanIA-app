@@ -1,19 +1,24 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "../context/ThemeContext";
-import DocumentCardStyles from "../styles/DocumentCardStyles";
 import { formatDateToDisplay } from "../helper/FormatDateHelper";
+import DocumentCardStyles from "../styles/DocumentCardStyles";
 import { DocumenTypes } from "../types/DocumentType";
+import { DocumentsScreenNavigationProp } from "../types/NavigationTypes";
 
-type DocumentCardProps = { document: DocumenTypes };
-
-export const DocumentCard = ({ document }: DocumentCardProps) => {
+export const DocumentCard = ({ document }: { document: DocumenTypes }) => {
     const { createdAt, data } = document;
     const { colors } = useTheme();
     const styles = DocumentCardStyles(colors);
+    const navigation = useNavigation<DocumentsScreenNavigationProp>();
 
     return (
-        <TouchableOpacity style={styles.card}>
+        <TouchableOpacity
+            style={styles.card}
+            onPress={() =>
+                navigation.navigate("DocumentDetailScreen", { document })
+            }>
             <View style={styles.content}>
                 <Text style={styles.title}>{data.document_type}</Text>
 

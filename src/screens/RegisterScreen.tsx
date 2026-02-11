@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 import {
     Alert,
@@ -14,12 +13,7 @@ import { useTheme } from "../context/ThemeContext";
 import { onRegisterFeature } from "../features/RegisterFeature";
 import { useForm } from "../hooks/useForm";
 import LoginStyles from "../styles/LoginStyles";
-import { RootStackParamList } from "../types/NavigationTypes";
-
-type RegisterScreenNavigationProp = NativeStackNavigationProp<
-    RootStackParamList,
-    "Register"
->;
+import { RegisterScreenNavigationProp } from "../types/NavigationTypes";
 
 export const RegisterScreen = () => {
     const navigation = useNavigation<RegisterScreenNavigationProp>();
@@ -57,7 +51,7 @@ export const RegisterScreen = () => {
                     "Éxito",
                     "Registro exitoso, por favor inicia sesión",
                 );
-                navigation.navigate("Login");
+                navigation.navigate("LoginScreen");
             } else {
                 Alert.alert(
                     "Error",
@@ -132,7 +126,8 @@ export const RegisterScreen = () => {
             </TouchableOpacity>
 
             <View style={styles.messagesContainer}>
-                <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("LoginScreen")}>
                     <Text style={{ color: colors.primary }}>
                         ¿Ya tienes una cuenta? Iniciar Sesión
                     </Text>

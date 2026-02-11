@@ -1,5 +1,4 @@
 import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 import {
     Alert,
@@ -16,12 +15,7 @@ import { onLoginFeature } from "../features/LoginFeature";
 import { useForm } from "../hooks/useForm";
 import userStore from "../store/userStore";
 import LoginStyles from "../styles/LoginStyles";
-import { RootStackParamList } from "../types/NavigationTypes";
-
-type LoginScreenNavigationProp = NativeStackNavigationProp<
-    RootStackParamList,
-    "Login"
->;
+import { LoginScreenNavigationProp } from "../types/NavigationTypes";
 
 export const LoginScreen = () => {
     const navigation = useNavigation<LoginScreenNavigationProp>();
@@ -107,13 +101,13 @@ export const LoginScreen = () => {
 
             <View style={styles.messagesContainer}>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate("RecoverPass")}>
+                    onPress={() => navigation.navigate("RecoverPassScreen")}>
                     <Text style={{ color: colors.primary }}>
                         ¿Olvidaste tu contraseña?
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate("Register")}>
+                    onPress={() => navigation.navigate("RegisterScreen")}>
                     <Text style={{ color: colors.primary }}>
                         ¿No tienes una cuenta? Registrarse
                     </Text>
