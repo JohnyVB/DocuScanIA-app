@@ -22,9 +22,10 @@ export type DocumentData = {
 };
 
 export type DocumenTypes = {
-    uid: string;
+    firestoreId: string;
     ownerId: string;
     imagesUri: string[];
     createdAt: string;
+    show: boolean;
     data: DocumentData;
 };

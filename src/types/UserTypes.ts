@@ -1,5 +1,5 @@
 export type User = {
-    uid: string;
+    firestoreId: string;
     email: string;
     name: string;
     lastname: string;

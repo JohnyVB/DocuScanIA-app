@@ -19,6 +19,7 @@ export const DocumentsScreen = () => {
         setLoading(true);
         const data = await onDocumentsByUserId(token!);
         if (data.status === "success") {
+            console.log(JSON.stringify(data.documents, null, 2));
             setDocuments(data.documents);
         } else {
             setDocuments([]);
@@ -46,7 +47,7 @@ export const DocumentsScreen = () => {
                     data={documents}
                     style={{ marginTop: 20 }}
                     showsVerticalScrollIndicator={false}
-                    keyExtractor={(item) => item.uid}
+                    keyExtractor={(item, index) => item.firestoreId}
                     renderItem={({ item }) => <DocumentCard document={item} />}
                 />
             )}

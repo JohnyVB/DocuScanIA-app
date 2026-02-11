@@ -45,6 +45,7 @@ export const ScanScreen = () => {
         const data = await onUploadDocument(photos, token!);
         if (data.status === "success") {
             const newDocument: DocumenTypes = data.newDoc;
+            console.log(JSON.stringify(newDocument, null, 2));
             setDocument(newDocument);
             setDocuments([newDocument, ...documents]);
             setLoading(false);
