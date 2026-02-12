@@ -21,8 +21,8 @@ export const LoginScreen = () => {
     const navigation = useNavigation<LoginScreenNavigationProp>();
     const [loading, setLoading] = useState(false);
     const { email, password, onChangeForm } = useForm({
-        email: "johny.villegas.dev@gmail.com",
-        password: "johny23",
+        email: "",
+        password: "",
     });
     const { setToken, setUserData } = userStore();
     const { colors } = useTheme();
