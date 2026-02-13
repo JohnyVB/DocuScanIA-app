@@ -32,5 +32,6 @@ export default {
             apiDocumentsByUserId: process.env.API_DOCUMENTS_BY_USER_ID,
             apiDeleteDocumentById: process.env.API_DELETE_DOCUMENT_BY_ID,
         },
+        plugins: ["expo-localization"],
     },
 };

@@ -1,3 +1,4 @@
+import { i18n } from "@/i18n";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import {
@@ -11,8 +12,8 @@ import {
     View,
 } from "react-native";
 import { useTheme } from "../context/ThemeContext";
-import { onLoginFeature } from "../services/LoginService";
 import { useForm } from "../hooks/useForm";
+import { onLoginFeature } from "../services/LoginService";
 import userStore from "../store/userStore";
 import LoginStyles from "../styles/LoginStyles";
 import { LoginScreenNavigationProp } from "../types/NavigationTypes";
@@ -62,11 +63,13 @@ export const LoginScreen = () => {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             keyboardVerticalOffset={80}>
             <Text style={styles.title}>DocuScanAI</Text>
-            <Text style={styles.subtitle}>Iniciar Sesión</Text>
+            <Text style={styles.subtitle}>
+                {i18n.t("LoginScreen.subtitle")}
+            </Text>
 
             <TextInput
                 style={styles.input}
-                placeholder="Email"
+                placeholder={i18n.t("LoginScreen.placeholderInputEmail")}
                 placeholderTextColor={colors.text}
                 value={email}
                 onChangeText={(value) => onChangeForm(value, "email")}
@@ -76,7 +79,7 @@ export const LoginScreen = () => {
 
             <TextInput
                 style={styles.input}
-                placeholder="Contraseña"
+                placeholder={i18n.t("LoginScreen.placeholderInputPassword")}
                 placeholderTextColor={colors.text}
                 value={password}
                 onChangeText={(value) => onChangeForm(value, "password")}
@@ -89,12 +92,12 @@ export const LoginScreen = () => {
                 disabled={loading}>
                 {loading && (
                     <Text style={{ color: "#fff", fontSize: 16 }}>
-                        Cargando...
+                        {i18n.t("LoginScreen.loadingButtonText")}
                     </Text>
                 )}
                 {!loading && (
                     <Text style={{ color: "#fff", fontSize: 16 }}>
-                        Iniciar Sesión
+                        {i18n.t("LoginScreen.textLoginButton")}
                     </Text>
                 )}
             </TouchableOpacity>
@@ -103,13 +106,13 @@ export const LoginScreen = () => {
                 <TouchableOpacity
                     onPress={() => navigation.navigate("RecoverPassScreen")}>
                     <Text style={{ color: colors.primary }}>
-                        ¿Olvidaste tu contraseña?
+                        {i18n.t("LoginScreen.forgottenPassword")}
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     onPress={() => navigation.navigate("RegisterScreen")}>
                     <Text style={{ color: colors.primary }}>
-                        ¿No tienes una cuenta? Registrarse
+                        {i18n.t("LoginScreen.noAccountRegister")}
                     </Text>
                 </TouchableOpacity>
             </View>

@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 import ProfileStyles from "../../styles/ProfileStyles";
-import { ProfileItemProps } from "../../types/ProfileTypes";
 import { useTheme } from "../../context/ThemeContext";
+import { ProfileItemProps } from "@/types/NavigationTypes";
 
 const ProfileItem = ({ label, value }: ProfileItemProps) => {
     const { colors } = useTheme();

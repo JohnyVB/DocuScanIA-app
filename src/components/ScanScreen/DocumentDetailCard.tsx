@@ -11,9 +11,10 @@ import {
 import { useTheme } from "../../context/ThemeContext";
 import { formatDateToDisplay } from "../../helper/FormatDateHelper";
 import DocumentDetailCardStyles from "../../styles/DocumentDetailCardStyles";
-import { DocumenTypes } from "../../types/DocumentType";
+import { DocumentTypes } from "../../types/DocumentType";
+import { i18n } from "@/i18n";
 
-type DocumentDetailCardProps = { document: DocumenTypes };
+type DocumentDetailCardProps = { document: DocumentTypes };
 
 export default function DocumentDetailCard({
     document,
@@ -38,10 +39,12 @@ export default function DocumentDetailCard({
             <View style={styles.card}>
                 <Text style={styles.title}>{document.data.document_type}</Text>
                 <Text style={styles.meta}>
-                    Categoría: {document.data.category}
+                    {i18n.t("DocumentDetailCard.category")}:{" "}
+                    {document.data.category}
                 </Text>
                 <Text style={styles.meta}>
-                    Creado: {formatDateToDisplay(document.createdAt)}
+                    {i18n.t("DocumentDetailCard.created")}:{" "}
+                    {formatDateToDisplay(document.createdAt)}
                 </Text>
 
                 {document.imagesUri?.length > 0 && (
@@ -64,11 +67,11 @@ export default function DocumentDetailCard({
                     />
                 )}
 
-                <Section title="Resumen">
+                <Section title={i18n.t("DocumentDetailCard.summary")}>
                     <Text style={styles.text}>{document.data.summary}</Text>
                 </Section>
 
-                <Section title="Personas mencionadas">
+                <Section title={i18n.t("DocumentDetailCard.peopleMentioned")}>
                     {document.data.people_mentioned.map((p, index) => (
                         <View key={index} style={styles.listItem}>
                             <Text style={styles.bold}>{p.name}</Text>
@@ -77,7 +80,7 @@ export default function DocumentDetailCard({
                     ))}
                 </Section>
 
-                <Section title="Fechas importantes">
+                <Section title={i18n.t("DocumentDetailCard.importantDates")}>
                     <View style={styles.timeline}>
                         {document.data.important_dates.map((d, index) => (
                             <View key={index} style={styles.timelineItem}>
@@ -93,12 +96,16 @@ export default function DocumentDetailCard({
                     </View>
                 </Section>
 
-                <Section title="Datos adicionales">
+                <Section title={i18n.t("DocumentDetailCard.additionalData")}>
+                    {document.data.document_number && (
+                        <Text style={styles.text}>
+                            {i18n.t("DocumentDetailCard.documentNumber")}:{" "}
+                            {document.data.document_number}
+                        </Text>
+                    )}
                     <Text style={styles.text}>
-                        Número de documento: {document.data.document_number}
-                    </Text>
-                    <Text style={styles.text}>
-                        Dirección: {document.data.address}
+                        {i18n.t("DocumentDetailCard.address")}:{" "}
+                        {document.data.address}
                     </Text>
                     <Text
                         style={[
@@ -107,7 +114,8 @@ export default function DocumentDetailCard({
                                 ? { color: colors.danger }
                                 : { color: colors.primary },
                         ]}>
-                        Nivel de importancia: {document.data.importance_level}
+                        {i18n.t("DocumentDetailCard.levelImportance")}:{" "}
+                        {document.data.importance_level}
                     </Text>
                 </Section>
             </View>

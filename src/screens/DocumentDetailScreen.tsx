@@ -1,3 +1,4 @@
+import { i18n } from "@/i18n";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
@@ -11,14 +12,14 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import DocumentDetailCard from "../components/ScanScreen/DocumentDetailCard";
 import { useTheme } from "../context/ThemeContext";
+import { onDeleteDocumentById } from "../services/DocumentsService";
+import documentStore from "../store/documentStore";
+import userStore from "../store/userStore";
 import { DocumentDetailScreenStyles } from "../styles/DocumentDetailScreenStyles";
 import {
     DocumentDetailScreenNavigationProp,
     DocumentDetailScreenRouteProp,
 } from "../types/NavigationTypes";
-import { onDeleteDocumentById } from "../services/DocumentsService";
-import userStore from "../store/userStore";
-import documentStore from "../store/documentStore";
 
 export const DocumentDetailScreen = () => {
     const { token } = userStore();
@@ -62,12 +63,16 @@ export const DocumentDetailScreen = () => {
                         <TouchableOpacity
                             style={[styles.buttonItem, styles.buttonDelete]}
                             onPress={deleteDocument}>
-                            <Text style={styles.buttonText}>Eliminar</Text>
+                            <Text style={styles.buttonText}>
+                                {i18n.t("DocumentDetailScreen.btnDelete")}
+                            </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={[styles.buttonItem, styles.buttonGoBack]}
                             onPress={() => navigation.goBack()}>
-                            <Text style={styles.buttonText}>Atras</Text>
+                            <Text style={styles.buttonText}>
+                                {i18n.t("DocumentDetailScreen.btnGoBack")}
+                            </Text>
                         </TouchableOpacity>
                     </View>
                 </ScrollView>

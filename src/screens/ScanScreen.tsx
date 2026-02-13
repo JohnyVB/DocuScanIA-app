@@ -1,3 +1,4 @@
+import { i18n } from "@/i18n";
 import { Ionicons } from "@expo/vector-icons";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import React, { useEffect, useRef, useState } from "react";
@@ -18,7 +19,7 @@ import { onUploadDocument } from "../services/ScanService";
 import documentStore from "../store/documentStore";
 import userStore from "../store/userStore";
 import ScanStyles from "../styles/ScanStyles";
-import { DocumenTypes } from "../types/DocumentType";
+import { DocumentTypes } from "../types/DocumentType";
 
 export const ScanScreen = () => {
     const { token } = userStore();
@@ -28,7 +29,7 @@ export const ScanScreen = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const cameraRef = useRef<CameraView>(null);
     const [photos, setPhotos] = useState<string[]>([]);
-    const [document, setDocument] = useState<DocumenTypes | null>(null);
+    const [document, setDocument] = useState<DocumentTypes | null>(null);
     const { documents, setDocuments } = documentStore();
     const [scanStatus, setScanStatus] = useState<boolean>(true);
     const [errorMessage, setErrorMessage] = useState<string>("");
@@ -44,7 +45,7 @@ export const ScanScreen = () => {
         setLoading(true);
         const data = await onUploadDocument(photos, token!);
         if (data.status === "success") {
-            const newDocument: DocumenTypes = data.newDoc;
+            const newDocument: DocumentTypes = data.newDoc;
             setDocument(newDocument);
             setDocuments([newDocument, ...documents]);
             setLoading(false);
@@ -66,7 +67,7 @@ export const ScanScreen = () => {
 
     return (
         <SafeAreaView style={styles.container} edges={["top"]}>
-            <Text style={styles.title}>Scan</Text>
+            <Text style={styles.title}>{i18n.t("ScanScreen.title")}</Text>
             {scanStatus && !loading && !document ? (
                 <View style={[styles.body, styles.shadow]}>
                     <View style={StyleSheet.absoluteFill}>
@@ -139,7 +140,9 @@ export const ScanScreen = () => {
                             setScanStatus(true);
                             setDocument(null);
                         }}>
-                        <Text style={styles.textBtnScan}>Activar cámara</Text>
+                        <Text style={styles.textBtnScan}>
+                            {i18n.t("ScanScreen.activateCamera")}
+                        </Text>
                     </TouchableOpacity>
                 </ScrollView>
             ) : (
@@ -159,7 +162,7 @@ export const ScanScreen = () => {
                                     setPhotos([]);
                                 }}>
                                 <Text style={styles.textBtnScan}>
-                                    Activar cámara
+                                    {i18n.t("ScanScreen.activateCamera")}
                                 </Text>
                             </TouchableOpacity>
                         </View>

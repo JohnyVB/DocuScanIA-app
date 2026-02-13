@@ -1,13 +1,13 @@
 import { create } from "zustand";
-import { DocumenTypes } from "../types/DocumentType";
+import { DocumentTypes } from "../types/DocumentType";
 
-type State = { documents: DocumenTypes[] };
+type State = { documents: DocumentTypes[] };
 
-type Actions = { setDocuments: (documents: DocumenTypes[]) => void };
+type Actions = { setDocuments: (documents: DocumentTypes[]) => void };
 
 const documentStore = create<State & Actions>((set) => ({
     documents: [],
-    setDocuments: (documents: DocumenTypes[]) => set({ documents }),
+    setDocuments: (documents: DocumentTypes[]) => set({ documents }),
 }));
 
 export default documentStore;

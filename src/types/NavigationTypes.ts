@@ -1,6 +1,6 @@
 import { RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { DocumenTypes } from "./DocumentType";
+import { DocumentTypes } from "./DocumentType";
 
 export type RootStackParamList = {
     LoginScreen: undefined;
@@ -11,7 +11,7 @@ export type RootStackParamList = {
     ProfileScreen: undefined;
     DocumentStack: undefined;
     DocumentsScreen: undefined;
-    DocumentDetailScreen: { document: DocumenTypes };
+    DocumentDetailScreen: { document: DocumentTypes };
 };
 
 export type TabParamList = {

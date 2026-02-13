@@ -1,3 +1,4 @@
+import { i18n } from "@/i18n";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import {
@@ -10,8 +11,8 @@ import {
     View,
 } from "react-native";
 import { useTheme } from "../context/ThemeContext";
-import { onRegisterFeature } from "../services/RegisterService";
 import { useForm } from "../hooks/useForm";
+import { onRegisterFeature } from "../services/RegisterService";
 import LoginStyles from "../styles/LoginStyles";
 import { RegisterScreenNavigationProp } from "../types/NavigationTypes";
 
@@ -71,11 +72,13 @@ export const RegisterScreen = () => {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             keyboardVerticalOffset={80}>
             <Text style={styles.title}>DocuScanAI</Text>
-            <Text style={styles.subtitle}>Registro</Text>
+            <Text style={styles.subtitle}>
+                {i18n.t("RegisterScreen.subTitle")}
+            </Text>
 
             <TextInput
                 style={styles.input}
-                placeholder="Nombre"
+                placeholder={i18n.t("RegisterScreen.placeholderInputName")}
                 placeholderTextColor={colors.textSecondary}
                 value={name}
                 onChangeText={(value) => onChangeForm(value, "name")}
@@ -84,7 +87,7 @@ export const RegisterScreen = () => {
 
             <TextInput
                 style={styles.input}
-                placeholder="Apellido"
+                placeholder={i18n.t("RegisterScreen.placeholderInputLastName")}
                 placeholderTextColor={colors.textSecondary}
                 value={lastname}
                 onChangeText={(value) => onChangeForm(value, "lastname")}
@@ -93,7 +96,7 @@ export const RegisterScreen = () => {
 
             <TextInput
                 style={styles.input}
-                placeholder="Email"
+                placeholder={i18n.t("RegisterScreen.placeholderInputEmail")}
                 placeholderTextColor={colors.textSecondary}
                 value={email}
                 onChangeText={(value) => onChangeForm(value, "email")}
@@ -103,7 +106,7 @@ export const RegisterScreen = () => {
 
             <TextInput
                 style={styles.input}
-                placeholder="Contraseña"
+                placeholder={i18n.t("RegisterScreen.placeholderInputPassword")}
                 placeholderTextColor={colors.textSecondary}
                 value={password}
                 onChangeText={(value) => onChangeForm(value, "password")}
@@ -116,11 +119,11 @@ export const RegisterScreen = () => {
                 disabled={loading}>
                 {loading ? (
                     <Text style={{ color: "#fff", fontSize: 16 }}>
-                        Cargando...
+                        {i18n.t("RegisterScreen.loadingButtonText")}
                     </Text>
                 ) : (
                     <Text style={{ color: "#fff", fontSize: 16 }}>
-                        Registrarse
+                        {i18n.t("RegisterScreen.registerButtonText")}
                     </Text>
                 )}
             </TouchableOpacity>
@@ -129,7 +132,7 @@ export const RegisterScreen = () => {
                 <TouchableOpacity
                     onPress={() => navigation.navigate("LoginScreen")}>
                     <Text style={{ color: colors.primary }}>
-                        ¿Ya tienes una cuenta? Iniciar Sesión
+                        {i18n.t("RegisterScreen.loginLinkText")}
                     </Text>
                 </TouchableOpacity>
             </View>

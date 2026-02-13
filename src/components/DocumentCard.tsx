@@ -4,10 +4,10 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "../context/ThemeContext";
 import { formatDateToDisplay } from "../helper/FormatDateHelper";
 import DocumentCardStyles from "../styles/DocumentCardStyles";
-import { DocumenTypes } from "../types/DocumentType";
+import { DocumentTypes } from "../types/DocumentType";
 import { DocumentsScreenNavigationProp } from "../types/NavigationTypes";
 
-export const DocumentCard = ({ document }: { document: DocumenTypes }) => {
+export const DocumentCard = ({ document }: { document: DocumentTypes }) => {
     const { createdAt, data } = document;
     const { colors } = useTheme();
     const styles = DocumentCardStyles(colors);

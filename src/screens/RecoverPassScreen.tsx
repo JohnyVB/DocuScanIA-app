@@ -1,3 +1,4 @@
+import { i18n } from "@/i18n";
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
@@ -10,12 +11,12 @@ import {
     View,
 } from "react-native";
 import { useTheme } from "../context/ThemeContext";
+import { useForm } from "../hooks/useForm";
 import {
     onResetPasswordFeature,
     onSendResetPasswordCodeFeature,
     onVerifyResetPasswordCodeFeature,
 } from "../services/RecoverPassService";
-import { useForm } from "../hooks/useForm";
 import LoginStyles from "../styles/LoginStyles";
 import { RecoverPassScreenNavigationProp } from "../types/NavigationTypes";
 
@@ -106,13 +107,18 @@ export const RecoverPassScreen = () => {
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             keyboardVerticalOffset={80}>
             <Text style={styles.title}>DocuScanAI</Text>
-            <Text style={styles.subtitle}>Recuperar Contraseña</Text>
+            <Text style={styles.subtitle}>
+                {i18n.t("RecoverPassScreen.subTitle")}
+            </Text>
 
             {step === "email" && (
                 <>
                     <TextInput
                         style={styles.input}
-                        placeholder="Email"
+                        placeholder={i18n.t(
+                            "RecoverPassScreen.placeholderInputEmail",
+                        )}
+                        placeholderTextColor={colors.text}
                         value={email}
                         onChangeText={(value) => onChangeForm(value, "email")}
                         keyboardType="email-address"
@@ -123,7 +129,7 @@ export const RecoverPassScreen = () => {
                         onPress={handleSendCode}
                         disabled={loading}>
                         <Text style={{ color: "#fff", fontSize: 16 }}>
-                            Enviar Código
+                            {i18n.t("RecoverPassScreen.textCodeButton")}
                         </Text>
                     </TouchableOpacity>
                 </>
@@ -133,7 +139,10 @@ export const RecoverPassScreen = () => {
                 <>
                     <TextInput
                         style={styles.input}
-                        placeholder="Código de 6 dígitos"
+                        placeholder={i18n.t(
+                            "RecoverPassScreen.placeholderInputCode",
+                        )}
+                        placeholderTextColor={colors.text}
                         value={code}
                         onChangeText={(value) => onChangeForm(value, "code")}
                         keyboardType="number-pad"
@@ -144,7 +153,7 @@ export const RecoverPassScreen = () => {
                         onPress={handleVerifyCode}
                         disabled={loading}>
                         <Text style={{ color: "#fff", fontSize: 16 }}>
-                            Verificar Código
+                            {i18n.t("RecoverPassScreen.textButtonVerifyCode")}
                         </Text>
                     </TouchableOpacity>
                 </>
@@ -159,8 +168,10 @@ export const RecoverPassScreen = () => {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder="Nueva Contraseña"
-                        placeholderTextColor="#999"
+                        placeholder={i18n.t(
+                            "RecoverPassScreen.placeholderInputNewPass",
+                        )}
+                        placeholderTextColor={colors.text}
                         autoCapitalize="none"
                         autoCorrect={false}
                         value={password}
@@ -171,7 +182,9 @@ export const RecoverPassScreen = () => {
                     />
                     <TextInput
                         style={styles.input}
-                        placeholder="Confirmar Nueva Contraseña"
+                        placeholder={i18n.t(
+                            "RecoverPassScreen.placeholderInputConfirmPass",
+                        )}
                         placeholderTextColor="#999"
                         autoCapitalize="none"
                         autoCorrect={false}
@@ -186,7 +199,7 @@ export const RecoverPassScreen = () => {
                         onPress={handleResetPassword}
                         disabled={loading}>
                         <Text style={{ color: "#fff", fontSize: 16 }}>
-                            Guardar Contraseña
+                            {i18n.t("RecoverPassScreen.textSavePasswordButton")}
                         </Text>
                     </TouchableOpacity>
                 </>
@@ -194,7 +207,9 @@ export const RecoverPassScreen = () => {
 
             <View style={styles.messagesContainer}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Text style={{ color: "blue" }}>Atrás</Text>
+                    <Text style={{ color: colors.primary }}>
+                        {i18n.t("RecoverPassScreen.backButtonText")}
+                    </Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>

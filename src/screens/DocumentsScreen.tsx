@@ -1,3 +1,4 @@
+import { i18n } from "@/i18n";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -32,14 +33,16 @@ export const DocumentsScreen = () => {
 
     return (
         <SafeAreaView style={styles.container} edges={["top"]}>
-            <Text style={styles.title}>Documents</Text>
+            <Text style={styles.title}>{i18n.t("DocumentsScreen.title")}</Text>
             {documents.length === 0 && loading ? (
                 <View style={styles.activityContainer}>
                     <ActivityIndicator size="large" color={colors.text} />
                 </View>
             ) : documents.length === 0 && !loading ? (
                 <View style={styles.noDataContainer}>
-                    <Text style={styles.subTitle}>No hay documentos</Text>
+                    <Text style={styles.subTitle}>
+                        {i18n.t("DocumentsScreen.noDocuments")}
+                    </Text>
                 </View>
             ) : (
                 <FlatList

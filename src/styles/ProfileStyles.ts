@@ -10,14 +10,12 @@ const ProfileStyles = (colors: ThemeColors) =>
         },
         avatarContainer: { alignItems: "center", marginVertical: 24 },
         card: {
-            backgroundColor: colors.card,
-            borderRadius: 16,
             padding: 20,
             gap: 16,
-            elevation: 3,
-            shadowColor: "#000",
-            shadowOpacity: 0.05,
-            shadowRadius: 10,
+            borderRadius: 18,
+            borderWidth: 1,
+            backgroundColor: colors.card,
+            borderColor: colors.border,
         },
         item: {
             borderBottomWidth: 1,
@@ -32,8 +30,7 @@ const ProfileStyles = (colors: ThemeColors) =>
             marginTop: 4,
         },
         logoutButton: {
-            marginTop: "auto",
-            marginBottom: 24,
+            marginVertical: 24,
             backgroundColor: colors.danger,
             paddingVertical: 14,
             borderRadius: 12,
@@ -44,13 +41,17 @@ const ProfileStyles = (colors: ThemeColors) =>
         },
         logoutText: { color: colors.textBtn, fontSize: 16, fontWeight: "600" },
         toggleContainer: {
-            marginTop: 20,
+            marginTop: 24,
+            padding: 18,
+            borderRadius: 18,
+            borderWidth: 1,
             flexDirection: "row",
-            alignItems: "center",
             justifyContent: "space-between",
-            paddingHorizontal: 20,
+            alignItems: "center",
+            backgroundColor: colors.card,
+            borderColor: colors.border,
         },
-        textToggle: { color: colors.text, fontSize: 16, marginBottom: 8 },
+        textToggle: { fontSize: 16, fontWeight: "600", color: colors.text },
     });
 
 export default ProfileStyles;

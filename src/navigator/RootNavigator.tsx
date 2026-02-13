@@ -12,6 +12,7 @@ import { RegisterScreen } from "../screens/RegisterScreen";
 import { ScanScreen } from "../screens/ScanScreen";
 import userStore from "../store/userStore";
 import { RootStackParamList, TabParamList } from "../types/NavigationTypes";
+import { i18n } from "@/i18n";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
@@ -55,6 +56,7 @@ function MyTabs() {
                             color={focused ? "#007AFF" : "#8E8E93"}
                         />
                     ),
+                    title: i18n.t("MyTabs.ScanScreen"),
                 }}
             />
             <Tab.Screen
@@ -68,6 +70,7 @@ function MyTabs() {
                             color={focused ? "#007AFF" : "#8E8E93"}
                         />
                     ),
+                    title: i18n.t("MyTabs.DocumentScreen"),
                 }}
             />
             <Tab.Screen
@@ -81,6 +84,7 @@ function MyTabs() {
                             color={focused ? "#007AFF" : "#8E8E93"}
                         />
                     ),
+                    title: i18n.t("MyTabs.ProfileScreen"),
                 }}
             />
         </Tab.Navigator>
