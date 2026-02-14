@@ -8,14 +8,21 @@ export default {
         orientation: "portrait",
         icon: "./assets/icon.png",
         splash: {
-            image: "./assets/splash-icon.png",
+            image: "./assets/splash-light.png",
             resizeMode: "contain",
             backgroundColor: "#ffffff",
         },
-        ios: { supportsTablet: false },
+        dark: {
+            splash: {
+                image: "./assets/splash-dark.png",
+                resizeMode: "contain",
+                backgroundColor: "#0F0F1A",
+            },
+        },
+        ios: { supportsTablet: true },
         android: {
             adaptiveIcon: {
-                foregroundImage: "./assets/adaptive-icon.png",
+                foregroundImage: "./assets/icon.png",
                 backgroundColor: "#ffffff",
             },
         },
