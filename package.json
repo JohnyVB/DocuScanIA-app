@@ -6,6 +6,7 @@
         "start": "expo start",
         "fix": "npx expo install --check",
         "preview": "eas build --platform ios --profile preview",
+        "preview:local": "eas build --platform ios --profile preview --local",
         "doctor": "npx expo-doctor"
     },
     "dependencies": {
