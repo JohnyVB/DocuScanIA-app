@@ -7,26 +7,15 @@ export default {
         version: "1.0.0",
         orientation: "portrait",
         icon: "./assets/icon.png",
-        splash: {
-            image: "./assets/splash-light.png",
-            resizeMode: "contain",
-            backgroundColor: "#ffffff",
-        },
-        dark: {
-            splash: {
-                image: "./assets/splash-dark.png",
-                resizeMode: "contain",
-                backgroundColor: "#0F0F1A",
-            },
-        },
         ios: { supportsTablet: true },
         android: {
             adaptiveIcon: {
-                foregroundImage: "./assets/icon.png",
-                backgroundColor: "#ffffff",
+                foregroundImage: "./assets/adaptive-icon.png",
+                backgroundColor: "#FFFFFF",
             },
         },
         extra: {
+            eas: { projectId: "b239b539-c609-4824-8322-c6f811c0830f" },
             apiBaseUrl: process.env.API_BASE_URL,
             apiLoginUrl: process.env.API_LOGIN_URL,
             apiRegisterUrl: process.env.API_NEW_USER_URL,
@@ -39,6 +28,6 @@ export default {
             apiDocumentsByUserId: process.env.API_DOCUMENTS_BY_USER_ID,
             apiDeleteDocumentById: process.env.API_DELETE_DOCUMENT_BY_ID,
         },
-        plugins: ["expo-localization"],
+        plugins: ["expo-localization", "expo-font"],
     },
 };
